@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Lista de Presentes · Guilherme & Laura</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      background-color: #f9fbfc;
+      color: #333;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 1rem;
+      color: #2c3e50;
+    }
+    p.subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+
+    .grid-presentes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .card-presente {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-presente:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-presente .img-wrapper {
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+    }
+
+    .card-presente .img-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-presente .info {
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .card-presente .info h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #34495e;
+    }
+    .card-presente .info span {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.2s ease;
+      z-index: 100;
+    }
+    .modal.aberto {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-conteudo {
+      background: #fff;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    .modal-conteudo .fechar-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: #888;
+      cursor: pointer;
+    }
+    .modal-conteudo .fechar-btn:hover {
+      color: #333;
+    }
+    .modal-conteudo img.qrcode {
+      width: 80%;
+      max-width: 240px;
+      margin: 1rem auto;
+    }
+    .modal-conteudo .valor {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    .modal-conteudo .payload-container {
+      background: #f4f7f8;
+      padding: 0.75rem;
+      border-radius: 4px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .modal-conteudo button.copiar-btn {
+      background: #3498db;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .modal-conteudo button.copiar-btn:hover {
+      background: #2980b9;
+    }
+
+    .btn-fechar {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: #7f8c8d;
+      transition: color 0.2s ease;
+    }
+    .btn-fechar:hover {
+      color: #2c3e50;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .modal-conteudo {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🎁 Bem-vindo à lista de presentes da nova casa!</h1>
+    <p class="subtitle">
+      Ajude com um valor para ajudar a construir esse momento tão especial. Muito obrigado(a) pela sua lembrança!
+    </p>
+
+    <div class="grid-presentes" id="gridPresentes">
+    </div>
+  </div>
+
+  <div class="modal" id="modalPIX">
+    <div class="modal-conteudo">
+      <button class="fechar-btn btn-fechar" id="btnFecharModal">&times;</button>
+      <h2 id="modalTitulo">...</h2>
+      <div class="valor" id="modalValor">R$ 0,00</div>
+      <img src="" alt="QR Code PIX" class="qrcode" id="modalQRCode" />
+      <div class="payload-container" id="modalPayload"></div>
+      <button class="copiar-btn" id="btnCopiarPayload">Copiar Código</button>
+    </div>
+  </div>
+
+  <script>
+    const presentes = [
+      {
+        id: "conjuntos_talher",
+        nome: "Conjunto de Talheres",
+        foto: "images/presentes/talheres.jpeg",
+        qrImg: "images/qrcodes/talheres.png",
+        valor: "75,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDU3NS4wMDU4MDJCUjU5MjJHdWlsaGVybWUgTS4gVGFnbGlldHRpNjAxMlNhcmFuZGkgLSBSUzYyMDcwNTAzKioqNjMwNDUzNDk="
+      },
+      {
+        id: "chaleira_eletrica",
+        nome: "Chaleira Elétrica",
+        foto: "images/presentes/chaleira.jpg",
+        qrImg: "images/qrcodes/chaleira.png",
+        valor: "120,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYxMjAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ0RkZE"
+      },
+      {
+        id: "jogo_toalhas",
+        nome: "Jogo de Toalhas",
+        foto: "images/presentes/jogo_toalhas.jpeg",
+        qrImg: "images/qrcodes/jogo_toalhas.png",
+        valor: "150,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYxNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDRFQjM4"
+      },
+      {
+        id: "jogo_de_pratos",
+        nome: "Jogo de Pratos",
+        foto: "images/presentes/jogo_pratos.jpg",
+        qrImg: "images/qrcodes/jogo_pratos.png",
+        valor: "200,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYyMDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ5QT M4"
+      },
+      {
+        id: "ferro_de_passar",
+        nome: "Ferro de Passar",
+        foto: "images/presentes/ferro.jpeg",
+        qrImg: "images/qrcodes/ferro.png",
+        valor: "250,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYyNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ0QjEz"
+      },
+      {
+        id: "tapete_sala",
+        nome: "Tapete de Sala",
+        foto: "images/presentes/tapete_sala.jpeg",
+        qrImg: "images/qrcodes/tapete_sala.png",
+        valor: "250,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYyNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ0QjEz"
+      },
+      {
+        id: "cafeteira_eletrica",
+        nome: "Cafeteira Elétrica",
+        foto: "images/presentes/cafeteira_eletrica.jpeg",
+        qrImg: "images/qrcodes/cafeteira_eletrica.png",
+        valor: "350,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYzNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQyQjBB"
+      },
+      {
+        id: "conjunto_panela",
+        nome: "Conjunto de Panelas",
+        foto: "images/presentes/panelas.jpeg",
+        qrImg: "images/qrcodes/panelas.png",
+        valor: "400,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY0MDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDRDQTRG"
+      },
+      {
+        id: "liquidificador",
+        nome: "Liquidificador",
+        foto: "images/presentes/liquidificador.jpg",
+        qrImg: "images/qrcodes/liquidificador.png",
+        valor: "550,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY1NTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ3QjdE"
+      },
+      {
+        id: "forno_eletrico",
+        nome: "Forno Elétrico",
+        foto: "images/presentes/forno.jpg",
+        qrImg: "images/qrcodes/forno.png",
+        valor: "600,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY2MDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQwQTdE"
+      },
+      {
+        id: "microondas_compacto",
+        nome: "Microondas Compacto",
+        foto: "images/presentes/microondas_compacto.jpeg",
+        qrImg: "images/qrcodes/microondas_compacto.png",
+        valor: "900,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY5MDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQwQUI4"
+      },
+      {
+        id: "lava_roupa",
+        nome: "Máquina de Lavar Roupa",
+        foto: "images/presentes/lava_roupa.jpeg",
+        qrImg: "images/qrcodes/lava_roupa.png",
+        valor: "1000,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcxMDAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0MEExOA=="
+      },
+      {
+        id: "aspirador_portatil",
+        nome: "Aspirador Portátil",
+        foto: "images/presentes/aspirador_portatil.jpeg",
+        qrImg: "images/qrcodes/aspirador_portatil.png",
+        valor: "1300,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcxMzAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0QUEzMw=="
+      },
+      {
+        id: "cama_box",
+        nome: "Cama Box",
+        foto: "images/presentes/cama_box.jpg",
+        qrImg: "images/qrcodes/cama_box.png",
+        valor: "1500,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcxNTAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0RkE0NA=="
+      },
+      {
+        id: "geladeira",
+        nome: "Geladeira",
+        foto: "images/presentes/geladeira.jpeg",
+        qrImg: "images/qrcodes/geladeira.png",
+        valor: "2000,00",
+        payloadBase64:
+          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcyMDAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0OTRGMg=="
+      }
+    ];
+
+    function montarGridDePresentes() {
+      const grid = document.getElementById("gridPresentes");
+      presentes.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "card-presente";
+        card.dataset.id = item.id;
+        card.innerHTML = `
+          <div class="img-wrapper">
+            <img src="${item.foto}" alt="${item.nome}" />
+          </div>
+          <div class="info">
+            <h3>${item.nome}</h3>
+            <span>R$ ${item.valor}</span>
+          </div>
+        `;
+        card.addEventListener("click", () => abrirModal(item.id));
+        grid.appendChild(card);
+      });
+    }
+
+    function abrirModal(idPresente) {
+      const presente = presentes.find((p) => p.id === idPresente);
+      if (!presente) return;
+
+      document.getElementById("modalTitulo").innerText = presente.nome;
+      document.getElementById("modalValor").innerText = `R$ ${presente.valor}`;
+      const imgEl = document.getElementById("modalQRCode");
+      imgEl.src = presente.qrImg;
+      imgEl.alt = `QR Code PIX - ${presente.nome}`;
+
+      const payloadPuro = atob(presente.payloadBase64);
+      document.getElementById("modalPayload").innerText = payloadPuro;
+
+      const modal = document.getElementById("modalPIX");
+      modal.classList.add("aberto");
+    }
+
+    function fecharModal() {
+      const modal = document.getElementById("modalPIX");
+      modal.classList.remove("aberto");
+    }
+
+    function copiarPayload() {
+      const texto = document.getElementById("modalPayload").innerText;
+      navigator.clipboard
+        .writeText(texto)
+        .then(() => {
+          alert("Código PIX copiado para a área de transferência!");
+        })
+        .catch(() => {
+          alert("Não foi possível copiar. Por favor, copie manualmente.");
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      montarGridDePresentes();
+      document
+        .getElementById("btnFecharModal")
+        .addEventListener("click", fecharModal);
+      document
+        .getElementById("modalPIX")
+        .addEventListener("click", (e) => {
+          if (e.target.id === "modalPIX") fecharModal();
+        });
+      document
+        .getElementById("btnCopiarPayload")
+        .addEventListener("click", copiarPayload);
+    });
+  </script>
+</body>
+</html>
