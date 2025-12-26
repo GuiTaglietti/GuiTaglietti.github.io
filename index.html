@@ -1,443 +1,607 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Guilherme Martinelli Taglietti — Backend Software Engineer focused on Distributed Systems, AI/LLM integrations, and High-Performance Computing."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
 
-  <title>Lista de Presentes · Guilherme & Laura</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    />
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    <meta
+      property="og:title"
+      content="Guilherme Martinelli Taglietti — Backend Software Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Distributed Systems • Python Microservices • AI/LLM Integrations • High-Performance C++"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/og-image.png" />
 
-  <style>
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html {
-      font-family: 'Inter', sans-serif;
-      scroll-behavior: smooth;
-      background-color: #f9fbfc;
-      color: #333;
-    }
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    <title>Guilherme M. Taglietti | Backend Software Engineer</title>
 
-    .container {
-      width: 100%;
-      max-width: 960px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-top: 1rem;
-      color: #2c3e50;
-    }
-    p.subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: #555;
-    }
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="stylesheet" href="styles.css" />
 
-    .grid-presentes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .card-presente {
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card-presente:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .card-presente .img-wrapper {
-      width: 100%;
-      padding-bottom: 100%;
-      position: relative;
-    }
-
-    .card-presente .img-wrapper img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-presente .info {
-      padding: 0.75rem;
-      text-align: center;
-    }
-    .card-presente .info h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: #34495e;
-    }
-    .card-presente .info span {
-      font-size: 0.9rem;
-      color: #7f8c8d;
-    }
-
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.2s ease;
-      z-index: 100;
-    }
-    .modal.aberto {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal-conteudo {
-      background: #fff;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      position: relative;
-    }
-    .modal-conteudo .fechar-btn {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      color: #888;
-      cursor: pointer;
-    }
-    .modal-conteudo .fechar-btn:hover {
-      color: #333;
-    }
-    .modal-conteudo img.qrcode {
-      width: 80%;
-      max-width: 240px;
-      margin: 1rem auto;
-    }
-    .modal-conteudo .valor {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-    }
-    .modal-conteudo .payload-container {
-      background: #f4f7f8;
-      padding: 0.75rem;
-      border-radius: 4px;
-      word-break: break-all;
-      font-family: monospace;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-    }
-    .modal-conteudo button.copiar-btn {
-      background: #3498db;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    .modal-conteudo button.copiar-btn:hover {
-      background: #2980b9;
-    }
-
-    .btn-fechar {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: transparent;
-      border: none;
-      font-size: 1.25rem;
-      cursor: pointer;
-      color: #7f8c8d;
-      transition: color 0.2s ease;
-    }
-    .btn-fechar:hover {
-      color: #2c3e50;
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.6rem;
+    <!-- JSON-LD (SEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Guilherme Martinelli Taglietti",
+        "jobTitle": "Backend Software Engineer",
+        "url": "https://github.com/GuiTaglietti",
+        "sameAs": [
+          "https://github.com/GuiTaglietti",
+          "https://linkedin.com/in/guilherme-taglietti",
+          "https://judge.beecrowd.com/pt/profile/625773"
+        ]
       }
-      .modal-conteudo {
-        width: 95%;
-      }
-    }
-  </style>
-</head>
+    </script>
+  </head>
 
-<body>
-  <div class="container">
-    <h1>🎁 Bem-vindo à lista de presentes da nova casa!</h1>
-    <p class="subtitle">
-      Ajude com um valor para ajudar a construir esse momento tão especial. Muito obrigado(a) pela sua lembrança!
-    </p>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="grid-presentes" id="gridPresentes">
-    </div>
-  </div>
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span class="brand-text">Guilherme</span>
+        </a>
 
-  <div class="modal" id="modalPIX">
-    <div class="modal-conteudo">
-      <button class="fechar-btn btn-fechar" id="btnFecharModal">&times;</button>
-      <h2 id="modalTitulo">...</h2>
-      <div class="valor" id="modalValor">R$ 0,00</div>
-      <img src="" alt="QR Code PIX" class="qrcode" id="modalQRCode" />
-      <div class="payload-container" id="modalPayload"></div>
-      <button class="copiar-btn" id="btnCopiarPayload">Copiar Código</button>
-    </div>
-  </div>
+        <nav class="nav" aria-label="Primary navigation">
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-expanded="false"
+            aria-controls="navMenu"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="hamburger" aria-hidden="true"></span>
+          </button>
 
-  <script>
-    const presentes = [
-      {
-        id: "conjuntos_talher",
-        nome: "Conjunto de Talheres",
-        foto: "images/presentes/talheres.jpeg",
-        qrImg: "images/qrcodes/talheres.png",
-        valor: "75,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDU3NS4wMDU4MDJCUjU5MjJHdWlsaGVybWUgTS4gVGFnbGlldHRpNjAxMlNhcmFuZGkgLSBSUzYyMDcwNTAzKioqNjMwNDUzNDk="
-      },
-      {
-        id: "chaleira_eletrica",
-        nome: "Chaleira Elétrica",
-        foto: "images/presentes/chaleira.jpg",
-        qrImg: "images/qrcodes/chaleira.png",
-        valor: "120,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYxMjAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ0RkZE"
-      },
-      {
-        id: "jogo_toalhas",
-        nome: "Jogo de Toalhas",
-        foto: "images/presentes/jogo_toalhas.jpeg",
-        qrImg: "images/qrcodes/jogo_toalhas.png",
-        valor: "150,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYxNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDRFQjM4"
-      },
-      {
-        id: "jogo_de_pratos",
-        nome: "Jogo de Pratos",
-        foto: "images/presentes/jogo_pratos.jpg",
-        qrImg: "images/qrcodes/jogo_pratos.png",
-        valor: "200,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYyMDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ5QT M4"
-      },
-      {
-        id: "ferro_de_passar",
-        nome: "Ferro de Passar",
-        foto: "images/presentes/ferro.jpeg",
-        qrImg: "images/qrcodes/ferro.png",
-        valor: "250,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYyNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ0QjEz"
-      },
-      {
-        id: "tapete_sala",
-        nome: "Tapete de Sala",
-        foto: "images/presentes/tapete_sala.jpeg",
-        qrImg: "images/qrcodes/tapete_sala.png",
-        valor: "250,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYyNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ0QjEz"
-      },
-      {
-        id: "cafeteira_eletrica",
-        nome: "Cafeteira Elétrica",
-        foto: "images/presentes/cafeteira_eletrica.jpeg",
-        qrImg: "images/qrcodes/cafeteira_eletrica.png",
-        valor: "350,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDYzNTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQyQjBB"
-      },
-      {
-        id: "conjunto_panela",
-        nome: "Conjunto de Panelas",
-        foto: "images/presentes/panelas.jpeg",
-        qrImg: "images/qrcodes/panelas.png",
-        valor: "400,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY0MDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDRDQTRG"
-      },
-      {
-        id: "liquidificador",
-        nome: "Liquidificador",
-        foto: "images/presentes/liquidificador.jpg",
-        qrImg: "images/qrcodes/liquidificador.png",
-        valor: "550,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY1NTAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQ3QjdE"
-      },
-      {
-        id: "forno_eletrico",
-        nome: "Forno Elétrico",
-        foto: "images/presentes/forno.jpg",
-        qrImg: "images/qrcodes/forno.png",
-        valor: "600,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY2MDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQwQTdE"
-      },
-      {
-        id: "microondas_compacto",
-        nome: "Microondas Compacto",
-        foto: "images/presentes/microondas_compacto.jpeg",
-        qrImg: "images/qrcodes/microondas_compacto.png",
-        valor: "900,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDY5MDAuMDA1ODAyQlI1OTIyR3VpbGhlcm1lIE0uIFRhZ2xpZXR0aTYwMTJTYXJhbmRpIC0gUlM2MjA3MDUwMyoqKjYzMDQwQUI4"
-      },
-      {
-        id: "lava_roupa",
-        nome: "Máquina de Lavar Roupa",
-        foto: "images/presentes/lava_roupa.jpeg",
-        qrImg: "images/qrcodes/lava_roupa.png",
-        valor: "1000,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcxMDAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0MEExOA=="
-      },
-      {
-        id: "aspirador_portatil",
-        nome: "Aspirador Portátil",
-        foto: "images/presentes/aspirador_portatil.jpeg",
-        qrImg: "images/qrcodes/aspirador_portatil.png",
-        valor: "1300,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcxMzAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0QUEzMw=="
-      },
-      {
-        id: "cama_box",
-        nome: "Cama Box",
-        foto: "images/presentes/cama_box.jpg",
-        qrImg: "images/qrcodes/cama_box.png",
-        valor: "1500,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcxNTAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0RkE0NA=="
-      },
-      {
-        id: "geladeira",
-        nome: "Geladeira",
-        foto: "images/presentes/geladeira.jpeg",
-        qrImg: "images/qrcodes/geladeira.png",
-        valor: "2000,00",
-        payloadBase64:
-          "MDAwMjAxMjY0NTAwMTRCUi5HT1YuQkNCLlBJWDAxMjNndWlpdGFnbGlldHRpQGdtYWlsLmNvbTUyMDQwMDAwNTMwMzk4NjU0MDcyMDAwLjAwNTgwMkJSNTkyMkd1aWxoZXJtZSBNLiBUYWdsaWV0dGk2MDEyU2FyYW5kaSAtIFJTNjIwNzA1MDMqKio2MzA0OTRGMg=="
-      }
-    ];
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certs">Certifications</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a class="nav-cta" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
 
-    function montarGridDePresentes() {
-      const grid = document.getElementById("gridPresentes");
-      presentes.forEach((item) => {
-        const card = document.createElement("div");
-        card.className = "card-presente";
-        card.dataset.id = item.id;
-        card.innerHTML = `
-          <div class="img-wrapper">
-            <img src="${item.foto}" alt="${item.nome}" />
+        <div class="header-actions">
+          <button
+            class="icon-btn"
+            id="themeToggle"
+            aria-label="Toggle dark mode"
+          >
+            <span class="icon-moon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <p class="kicker">Backend Software Engineer</p>
+            <h1>
+              Distributed Systems, AI/LLM Integrations,
+              <span class="accent">High-Performance Computing</span>
+            </h1>
+            <p class="lead">
+              I build scalable backend architectures with Python microservices,
+              asynchronous pipelines, and production-ready infrastructure.
+              Strong C++ performance background (genetic algorithms,
+              parallelism) and competitive programming experience.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="btn primary"
+                href="assets/Guilherme-Martinelli-Taglietti-CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download CV
+              </a>
+              <a class="btn ghost" href="#projects">View Projects</a>
+            </div>
+
+            <div class="quick-links">
+              <a
+                href="https://github.com/GuiTaglietti"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              >
+              <span class="dot">•</span>
+              <a
+                href="https://linkedin.com/in/guilherme-taglietti"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn</a
+              >
+              <span class="dot">•</span>
+              <a
+                href="https://judge.beecrowd.com/pt/profile/625773"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Beecrowd</a
+              >
+            </div>
           </div>
-          <div class="info">
-            <h3>${item.nome}</h3>
-            <span>R$ ${item.valor}</span>
+
+          <div class="hero-card reveal" aria-label="Profile card">
+            <div class="profile-wrap">
+              <img
+                class="profile-photo"
+                src="assets/profile.jpg"
+                alt="Photo of Guilherme Martinelli Taglietti"
+                loading="eager"
+              />
+              <div class="profile-glow" aria-hidden="true"></div>
+            </div>
+
+            <div class="profile-meta">
+              <div>
+                <p class="meta-title">Location</p>
+                <p class="meta-value">Brazil (Remote)</p>
+              </div>
+              <div>
+                <p class="meta-title">Focus</p>
+                <p class="meta-value">Backend • Distributed Systems • AI</p>
+              </div>
+              <div>
+                <p class="meta-title">Core Stack</p>
+                <p class="meta-value">
+                  Python • FastAPI/Flask • Redis • Celery
+                </p>
+              </div>
+            </div>
+
+            <div class="chips">
+              <span class="chip">Microservices</span>
+              <span class="chip">Async Pipelines</span>
+              <span class="chip">LLMs</span>
+              <span class="chip">Docker</span>
+              <span class="chip">AWS</span>
+              <span class="chip">C++ Performance</span>
+            </div>
           </div>
-        `;
-        card.addEventListener("click", () => abrirModal(item.id));
-        grid.appendChild(card);
-      });
-    }
+        </div>
 
-    function abrirModal(idPresente) {
-      const presente = presentes.find((p) => p.id === idPresente);
-      if (!presente) return;
+        <div class="hero-bg" aria-hidden="true"></div>
+      </section>
 
-      document.getElementById("modalTitulo").innerText = presente.nome;
-      document.getElementById("modalValor").innerText = `R$ ${presente.valor}`;
-      const imgEl = document.getElementById("modalQRCode");
-      imgEl.src = presente.qrImg;
-      imgEl.alt = `QR Code PIX - ${presente.nome}`;
+      <!-- ABOUT -->
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>About</h2>
+            <p>
+              Bachelor’s in Computer Science (UPF). Backend engineer focused on
+              scalable distributed systems, AI/LLM integrations, and
+              high-performance algorithms.
+            </p>
+          </div>
 
-      const payloadPuro = atob(presente.payloadBase64);
-      document.getElementById("modalPayload").innerText = payloadPuro;
+          <div class="grid-3">
+            <article class="card reveal">
+              <h3>Backend & Distributed Systems</h3>
+              <p>
+                Microservices, async communication, queues/workers, background
+                processing, reliability and cost control.
+              </p>
+            </article>
 
-      const modal = document.getElementById("modalPIX");
-      modal.classList.add("aberto");
-    }
+            <article class="card reveal">
+              <h3>AI & LLM Integrations</h3>
+              <p>
+                Production-grade LLM workflows, automation, and intelligent
+                features integrated into backend cores.
+              </p>
+            </article>
 
-    function fecharModal() {
-      const modal = document.getElementById("modalPIX");
-      modal.classList.remove("aberto");
-    }
+            <article class="card reveal">
+              <h3>High-Performance C++</h3>
+              <p>
+                Genetic algorithms, parallelism (OpenMP), multithreading, data
+                structures, and algorithm optimization.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-    function copiarPayload() {
-      const texto = document.getElementById("modalPayload").innerText;
-      navigator.clipboard
-        .writeText(texto)
-        .then(() => {
-          alert("Código PIX copiado para a área de transferência!");
-        })
-        .catch(() => {
-          alert("Não foi possível copiar. Por favor, copie manualmente.");
-        });
-    }
+      <!-- HIGHLIGHTS -->
+      <section class="section subtle">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Highlights</h2>
+            <p>Quick snapshot of what I deliver in real-world systems.</p>
+          </div>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      montarGridDePresentes();
-      document
-        .getElementById("btnFecharModal")
-        .addEventListener("click", fecharModal);
-      document
-        .getElementById("modalPIX")
-        .addEventListener("click", (e) => {
-          if (e.target.id === "modalPIX") fecharModal();
-        });
-      document
-        .getElementById("btnCopiarPayload")
-        .addEventListener("click", copiarPayload);
-    });
-  </script>
-</body>
+          <div class="grid-2">
+            <div class="card reveal">
+              <h3>Production-ready microservices</h3>
+              <ul class="bullets">
+                <li>FastAPI/Flask APIs with strong contracts</li>
+                <li>Redis + Celery pipelines (queues, workers, retries)</li>
+                <li>Dockerized services, Linux deployments</li>
+              </ul>
+            </div>
+
+            <div class="card reveal">
+              <h3>Automation + LLM workflows</h3>
+              <ul class="bullets">
+                <li>LLM integrations for intelligent automation</li>
+                <li>Cost-aware, observable background jobs</li>
+                <li>Data validation & structured reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="section" id="skills">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Skills</h2>
+            <p>
+              Focused on backend engineering, reliability, and scalable
+              architecture.
+            </p>
+          </div>
+
+          <div class="skill-grid">
+            <div class="card reveal">
+              <h3>Backend</h3>
+              <div class="tags">
+                <span>Python</span><span>FastAPI</span><span>Flask</span
+                ><span>REST</span><span>Microservices</span> <span>AsyncIO</span
+                ><span>Celery</span><span>Redis</span><span>Workers</span
+                ><span>Queues</span>
+              </div>
+            </div>
+
+            <div class="card reveal">
+              <h3>AI / Data</h3>
+              <div class="tags">
+                <span>LLM Integrations</span><span>LangChain</span
+                ><span>LangGraph</span><span>TensorFlow</span>
+                <span>Pandas</span><span>NumPy</span>
+              </div>
+            </div>
+
+            <div class="card reveal">
+              <h3>Performance</h3>
+              <div class="tags">
+                <span>C++</span><span>OpenMP</span><span>Multithreading</span
+                ><span>Algorithms</span><span>Data Structures</span>
+                <span>Genetic Algorithms</span>
+              </div>
+            </div>
+
+            <div class="card reveal">
+              <h3>Databases</h3>
+              <div class="tags">
+                <span>PostgreSQL</span><span>MySQL</span><span>Oracle</span
+                ><span>MongoDB</span><span>SQL</span><span>PL/SQL</span>
+              </div>
+            </div>
+
+            <div class="card reveal">
+              <h3>Infra & DevOps</h3>
+              <div class="tags">
+                <span>Linux</span><span>Docker</span><span>Docker Compose</span
+                ><span>AWS</span><span>CI/CD</span><span>Kubernetes</span>
+              </div>
+            </div>
+
+            <div class="card reveal">
+              <h3>Frontend (support)</h3>
+              <div class="tags">
+                <span>Vue.js</span><span>Bootstrap</span><span>TypeScript</span
+                ><span>React</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="section subtle" id="experience">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Experience</h2>
+            <p>
+              Selected experience aligned with backend, distributed systems, and
+              performance.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <article class="t-item card reveal">
+              <div class="t-top">
+                <h3>Software Engineer (Backend / Fullstack) — DocQ</h3>
+                <span class="t-date">Sep 2024 — Present</span>
+              </div>
+              <ul class="bullets">
+                <li>Distributed microservices in Python (FastAPI/Flask)</li>
+                <li>Async pipelines with Redis + Celery (queues/workers)</li>
+                <li>AI/LLM integrations enabling automation workflows</li>
+                <li>Dockerized deployments; Linux + AWS infrastructure</li>
+              </ul>
+            </article>
+
+            <article class="t-item card reveal">
+              <div class="t-top">
+                <h3>Research & Academic Systems — UPF</h3>
+                <span class="t-date">2022 — 2024</span>
+              </div>
+              <ul class="bullets">
+                <li>
+                  High-performance C++ genetic algorithm for university
+                  timetabling
+                </li>
+                <li>Parallelism and optimization (OpenMP, multithreading)</li>
+                <li>
+                  Java web app (JSF/PrimeFaces/JasperReports) for academic
+                  management
+                </li>
+                <li>Python validation scripts and structured JSON reporting</li>
+              </ul>
+            </article>
+
+            <article class="t-item card reveal">
+              <div class="t-top">
+                <h3>Teaching Assistant & Instructor — FabSoft</h3>
+                <span class="t-date">2023 — 2024</span>
+              </div>
+              <ul class="bullets">
+                <li>
+                  Mentored 50+ students (competitive programming + web dev
+                  “ZZ-On”)
+                </li>
+                <li>
+                  Algorithms, data structures, OOP; PHP/JS projects; Python data
+                  research
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section class="section" id="certs">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Certifications</h2>
+            <p>Verified Udemy certificates (IDs included).</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="card reveal">
+              <h3>Modern Advanced C++ Course</h3>
+              <p class="muted">
+                Udemy — UC-439ae987-261e-45a3-bc13-7ad6f70a321c
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>Mastering Data Structures & Algorithms using C and C++</h3>
+              <p class="muted">
+                Udemy — UC-ab722506-1517-4637-b5a2-bc858cd7170f
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>
+                TensorFlow: Machine Learning and Deep Learning with Python
+              </h3>
+              <p class="muted">
+                Udemy — UC-43ad56a5-618f-45cf-a688-e8d97d337399
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>
+                Java Best Practices for Efficient, Scalable, and Secure Code
+              </h3>
+              <p class="muted">
+                Udemy — UC-bd118b48-1dcb-4d70-8850-944a5ef2e5cd
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- EVENTS -->
+      <section class="section subtle" id="events">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Events & Competitions</h2>
+            <p>Community and continuous learning.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card reveal">
+              <h3>Competitive Programming</h3>
+              <ul class="bullets">
+                <li>OBI (Brazilian Informatics Olympiad)</li>
+                <li>SBC/ICPC South America (multiple phases)</li>
+                <li>Beecrowd practice and mentoring</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Conferences</h3>
+              <ul class="bullets">
+                <li>The Developers Conference (TDC) — São Paulo</li>
+                <li>Gramado Summit</li>
+                <li>Porto Alegre Summit</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Security & Community</h3>
+              <ul class="bullets">
+                <li>BSides BSB — Brasília</li>
+                <li>Tech meetups and workshops</li>
+                <li>Continuous learning projects</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Featured Projects</h2>
+            <p>Pin your best repositories on GitHub and link them here.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="card reveal">
+              <h3>DocQ Distributed Backend</h3>
+              <p class="muted">
+                Python microservices, queues/workers, automation pipelines,
+                AI/LLM integration patterns.
+              </p>
+              <div class="card-actions">
+                <a
+                  class="btn small ghost"
+                  href="https://github.com/GuiTaglietti"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View on GitHub</a
+                >
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <h3>Genetic Algorithm Timetabling</h3>
+              <p class="muted">
+                C++ performance, parallelism, heuristics, validation scripts,
+                reporting workflows.
+              </p>
+              <div class="card-actions">
+                <a
+                  class="btn small ghost"
+                  href="https://github.com/GuiTaglietti"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View on GitHub</a
+                >
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <h3>Competitive Programming</h3>
+              <p class="muted">
+                Algorithms, data structures, problem solving, training materials
+                and solutions.
+              </p>
+              <div class="card-actions">
+                <a
+                  class="btn small ghost"
+                  href="https://judge.beecrowd.com/pt/profile/625773"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Beecrowd Profile</a
+                >
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <h3>Personal Landing & CV</h3>
+              <p class="muted">
+                This site + ATS-friendly LaTeX CV (EN/PT) ready for
+                applications.
+              </p>
+              <div class="card-actions">
+                <a class="btn small ghost" href="#top">Back to top</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section subtle" id="contact">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Contact</h2>
+            <p>
+              Open to remote opportunities and backend engineering challenges.
+            </p>
+          </div>
+
+          <div class="contact-card card reveal">
+            <div class="contact-row">
+              <div>
+                <p class="meta-title">Email</p>
+                <a class="meta-link" href="mailto:guiitaglietti@gmail.com"
+                  >guiitaglietti@gmail.com</a
+                >
+              </div>
+              <div>
+                <p class="meta-title">LinkedIn</p>
+                <a
+                  class="meta-link"
+                  href="https://linkedin.com/in/guilherme-taglietti"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin.com/in/guilherme-taglietti
+                </a>
+              </div>
+              <div>
+                <p class="meta-title">GitHub</p>
+                <a
+                  class="meta-link"
+                  href="https://github.com/GuiTaglietti"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  github.com/GuiTaglietti
+                </a>
+              </div>
+            </div>
+
+            <p class="muted small-note">
+              Prefer email for first contact. For code samples, check GitHub
+              repositories and pinned projects.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <p>© <span id="year"></span> Guilherme Martinelli Taglietti</p>
+          <a href="#top" class="back-top">Back to top</a>
+        </div>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
 </html>
