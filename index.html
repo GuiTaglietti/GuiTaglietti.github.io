@@ -25,6 +25,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/og-image.png" />
 
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
+
     <title>Guilherme M. Taglietti | Backend Software Engineer</title>
 
     <link rel="preload" href="styles.css" as="style" />
@@ -52,7 +55,12 @@
     <header class="site-header" id="top">
       <div class="container header-inner">
         <a class="brand" href="#top" aria-label="Go to top">
-          <span class="brand-dot" aria-hidden="true"></span>
+          <img
+            class="brand-mark"
+            src="assets/favicon.png"
+            alt=""
+            aria-hidden="true"
+          />
           <span class="brand-text">Guilherme</span>
         </a>
 
@@ -68,16 +76,36 @@
           </button>
 
           <ul class="nav-menu" id="navMenu">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#certs">Certifications</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a class="nav-cta" href="#contact">Contact</a></li>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+            <li>
+              <a href="#experience" data-i18n="nav.experience">Experience</a>
+            </li>
+            <li><a href="#certs" data-i18n="nav.certs">Certifications</a></li>
+            <li><a href="#events" data-i18n="nav.events">Events</a></li>
+            <li>
+              <a class="nav-cta" href="#contact" data-i18n="nav.contact"
+                >Contact</a
+              >
+            </li>
           </ul>
         </nav>
 
         <div class="header-actions">
+          <button
+            class="lang-toggle"
+            id="langToggle"
+            type="button"
+            aria-label="Toggle language"
+          >
+            <span class="lang-toggle__flag" id="langFlag" aria-hidden="true"
+              >🇺🇸</span
+            >
+            <span class="lang-toggle__label" data-i18n="header.lang"
+              >Language</span
+            >
+          </button>
+
           <button
             class="theme-toggle"
             id="themeToggle"
@@ -88,7 +116,6 @@
               class="theme-toggle__icon theme-toggle__icon--moon"
               aria-hidden="true"
             >
-              <!-- Moon -->
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
                 <path
                   d="M21 13.2A8.6 8.6 0 0 1 10.8 3a7.2 7.2 0 1 0 10.2 10.2Z"
@@ -103,7 +130,6 @@
               class="theme-toggle__icon theme-toggle__icon--sun"
               aria-hidden="true"
             >
-              <!-- Sun -->
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
                 <path
                   d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"
@@ -118,23 +144,26 @@
                 />
               </svg>
             </span>
-            <span class="theme-toggle__label">Theme</span>
+            <span class="theme-toggle__label" data-i18n="header.theme"
+              >Theme</span
+            >
           </button>
         </div>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO -->
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-copy reveal">
-            <p class="kicker">Backend Software Engineer</p>
-            <h1>
+            <p class="kicker" data-i18n="hero.kicker">
+              Backend Software Engineer
+            </p>
+            <h1 data-i18n="hero.title">
               Distributed Systems, AI/LLM Integrations,
               <span class="accent">High-Performance Computing</span>
             </h1>
-            <p class="lead">
+            <p class="lead" data-i18n="hero.lead">
               I build scalable backend architectures with Python microservices,
               asynchronous pipelines, and production-ready infrastructure.
               Strong C++ performance background (genetic algorithms,
@@ -142,15 +171,57 @@
             </p>
 
             <div class="hero-actions">
-              <a
-                class="btn primary"
-                href="assets/Guilherme Martinelli Taglietti - Curriculum Vitae - English.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download CV
-              </a>
-              <a class="btn ghost" href="#contact">Get in touch</a>
+              <div class="cv-dropdown" id="cvDropdown">
+                <button
+                  class="btn primary cv-trigger"
+                  id="cvTrigger"
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span data-i18n="hero.cv">Download CV</span>
+                  <span class="cv-caret" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                      <path
+                        d="M6 9l6 6 6-6"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+
+                <div
+                  class="cv-menu"
+                  id="cvMenu"
+                  role="menu"
+                  aria-label="CV options"
+                >
+                  <a
+                    class="cv-item"
+                    role="menuitem"
+                    href="assets/Guilherme Martinelli Taglietti - Curriculum Vitae - English.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span class="cv-flag" aria-hidden="true">🇺🇸</span>
+                    <span data-i18n="cv.en">English</span>
+                  </a>
+
+                  <a
+                    class="cv-item"
+                    role="menuitem"
+                    href="assets/Guilherme Martinelli Taglietti - Currículo - Português.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span class="cv-flag" aria-hidden="true">🇧🇷</span>
+                    <span data-i18n="cv.pt">Português</span>
+                  </a>
+                </div>
+              </div>
             </div>
 
             <div class="quick-links">
@@ -185,33 +256,36 @@
                 alt="Photo of Guilherme Martinelli Taglietti"
                 loading="eager"
               />
-              <div class="profile-glow" aria-hidden="true"></div>
             </div>
 
             <div class="profile-meta">
               <div>
-                <p class="meta-title">Location</p>
-                <p class="meta-value">Brazil (Remote)</p>
+                <p class="meta-title" data-i18n="meta.location.t">Location</p>
+                <p class="meta-value" data-i18n="meta.location.v">
+                  Brazil (Remote)
+                </p>
               </div>
               <div>
-                <p class="meta-title">Focus</p>
-                <p class="meta-value">Backend • Distributed Systems • AI</p>
+                <p class="meta-title" data-i18n="meta.focus.t">Focus</p>
+                <p class="meta-value" data-i18n="meta.focus.v">
+                  Backend • Distributed Systems • AI
+                </p>
               </div>
               <div>
-                <p class="meta-title">Core Stack</p>
-                <p class="meta-value">
+                <p class="meta-title" data-i18n="meta.stack.t">Core Stack</p>
+                <p class="meta-value" data-i18n="meta.stack.v">
                   Python • FastAPI/Flask • Redis • Celery
                 </p>
               </div>
             </div>
 
             <div class="chips">
-              <span class="chip">Microservices</span>
-              <span class="chip">Async Pipelines</span>
-              <span class="chip">LLMs</span>
-              <span class="chip">Docker</span>
-              <span class="chip">AWS</span>
-              <span class="chip">C++ Performance</span>
+              <span class="chip" data-i18n="chip.1">Microservices</span>
+              <span class="chip" data-i18n="chip.2">Async Pipelines</span>
+              <span class="chip" data-i18n="chip.3">LLMs</span>
+              <span class="chip" data-i18n="chip.4">Docker</span>
+              <span class="chip" data-i18n="chip.5">AWS</span>
+              <span class="chip" data-i18n="chip.6">C++ Performance</span>
             </div>
           </div>
         </div>
@@ -219,12 +293,11 @@
         <div class="hero-bg" aria-hidden="true"></div>
       </section>
 
-      <!-- ABOUT -->
       <section class="section" id="about">
         <div class="container">
           <div class="section-head reveal">
-            <h2>About</h2>
-            <p>
+            <h2 data-i18n="about.h">About</h2>
+            <p data-i18n="about.p">
               Bachelor’s in Computer Science (UPF). Backend engineer focused on
               scalable distributed systems, AI/LLM integrations, and
               high-performance algorithms.
@@ -233,68 +306,110 @@
 
           <div class="grid-3">
             <article class="card reveal">
-              <h3>Backend & Distributed Systems</h3>
-              <p>
+              <h3 data-i18n="about.c1.h">Backend & Distributed Systems</h3>
+              <p data-i18n="about.c1.p">
                 Microservices, async communication, queues/workers, background
                 processing, reliability and cost control.
               </p>
             </article>
 
             <article class="card reveal">
-              <h3>AI & LLM Integrations</h3>
-              <p>
+              <h3 data-i18n="about.c2.h">AI & LLM Integrations</h3>
+              <p data-i18n="about.c2.p">
                 Production-grade LLM workflows, automation, and intelligent
                 features integrated into backend cores.
               </p>
             </article>
 
             <article class="card reveal">
-              <h3>High-Performance C++</h3>
-              <p>
+              <h3 data-i18n="about.c3.h">High-Performance C++</h3>
+              <p data-i18n="about.c3.p">
                 Genetic algorithms, parallelism (OpenMP), multithreading, data
                 structures, and algorithm optimization.
               </p>
             </article>
           </div>
+
+          <div class="education-wrap">
+            <article class="card reveal education-card">
+              <div class="education-top">
+                <h3 data-i18n="edu.h">Education</h3>
+                <span class="edu-pill" data-i18n="edu.pill">BSc • GPA 9.3</span>
+              </div>
+              <p class="muted edu-sub" data-i18n="edu.sub">
+                Bachelor’s in Computer Science — Universidade de Passo Fundo
+                (UPF)
+              </p>
+              <ul class="bullets">
+                <li data-i18n="edu.b1">
+                  Strong foundation in algorithms, data structures, operating
+                  systems, networks, databases, software engineering, and
+                  distributed systems.
+                </li>
+                <li data-i18n="edu.b2">
+                  Capstone (TCC): published research + C++ implementation of new
+                  heuristic initializations for a genetic algorithm that
+                  generates the university timetable.
+                </li>
+                <li data-i18n="edu.b3">
+                  Improved the final results by ~50% through heuristic
+                  initialization strategies, parallel optimization, and
+                  performance-focused engineering.
+                </li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
 
-      <!-- HIGHLIGHTS -->
       <section class="section subtle">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Highlights</h2>
-            <p>Quick snapshot of what I deliver in real-world systems.</p>
+            <h2 data-i18n="high.h">Highlights</h2>
+            <p data-i18n="high.p">
+              Quick snapshot of what I deliver in real-world systems.
+            </p>
           </div>
 
           <div class="grid-2">
             <div class="card reveal">
-              <h3>Production-ready microservices</h3>
+              <h3 data-i18n="high.c1.h">Production-ready microservices</h3>
               <ul class="bullets">
-                <li>FastAPI/Flask APIs with strong contracts</li>
-                <li>Redis + Celery pipelines (queues, workers, retries)</li>
-                <li>Dockerized services, Linux deployments</li>
+                <li data-i18n="high.c1.b1">
+                  FastAPI/Flask APIs with strong contracts
+                </li>
+                <li data-i18n="high.c1.b2">
+                  Redis + Celery pipelines (queues, workers, retries)
+                </li>
+                <li data-i18n="high.c1.b3">
+                  Dockerized services, Linux deployments
+                </li>
               </ul>
             </div>
 
             <div class="card reveal">
-              <h3>Automation + LLM workflows</h3>
+              <h3 data-i18n="high.c2.h">Automation + LLM workflows</h3>
               <ul class="bullets">
-                <li>LLM integrations for intelligent automation</li>
-                <li>Cost-aware, observable background jobs</li>
-                <li>Data validation & structured reporting</li>
+                <li data-i18n="high.c2.b1">
+                  LLM integrations for intelligent automation
+                </li>
+                <li data-i18n="high.c2.b2">
+                  Cost-aware, observable background jobs
+                </li>
+                <li data-i18n="high.c2.b3">
+                  Data validation & structured reporting
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SKILLS -->
       <section class="section" id="skills">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Skills</h2>
-            <p>
+            <h2 data-i18n="skills.h">Skills</h2>
+            <p data-i18n="skills.p">
               Focused on backend engineering, reliability, and scalable
               architecture.
             </p>
@@ -302,7 +417,7 @@
 
           <div class="skill-grid">
             <div class="card reveal">
-              <h3>Backend</h3>
+              <h3 data-i18n="skills.c1.h">Backend</h3>
               <div class="tags">
                 <span>Python</span><span>FastAPI</span><span>Flask</span
                 ><span>REST</span><span>Microservices</span> <span>AsyncIO</span
@@ -312,25 +427,27 @@
             </div>
 
             <div class="card reveal">
-              <h3>AI / Data</h3>
+              <h3 data-i18n="skills.c2.h">AI / Data</h3>
               <div class="tags">
-                <span>LLM Integrations</span><span>LangChain</span
-                ><span>LangGraph</span><span>TensorFlow</span>
-                <span>Pandas</span><span>NumPy</span>
+                <span data-i18n="skills.llm">LLM Integrations</span
+                ><span>LangChain</span><span>LangGraph</span
+                ><span>TensorFlow</span> <span>Pandas</span><span>NumPy</span>
               </div>
             </div>
 
             <div class="card reveal">
-              <h3>Performance</h3>
+              <h3 data-i18n="skills.c3.h">Performance</h3>
               <div class="tags">
-                <span>C++</span><span>OpenMP</span><span>Multithreading</span
-                ><span>Algorithms</span><span>Data Structures</span>
-                <span>Genetic Algorithms</span>
+                <span>C++</span><span>OpenMP</span
+                ><span data-i18n="skills.mt">Multithreading</span
+                ><span data-i18n="skills.alg">Algorithms</span
+                ><span data-i18n="skills.ds">Data Structures</span>
+                <span data-i18n="skills.ga">Genetic Algorithms</span>
               </div>
             </div>
 
             <div class="card reveal">
-              <h3>Databases</h3>
+              <h3 data-i18n="skills.c4.h">Databases</h3>
               <div class="tags">
                 <span>PostgreSQL</span><span>MySQL</span><span>Oracle</span
                 ><span>MongoDB</span><span>SQL</span><span>PL/SQL</span>
@@ -338,7 +455,7 @@
             </div>
 
             <div class="card reveal">
-              <h3>Infra & DevOps</h3>
+              <h3 data-i18n="skills.c5.h">Infra & DevOps</h3>
               <div class="tags">
                 <span>Linux</span><span>Docker</span><span>Docker Compose</span
                 ><span>AWS</span><span>CI/CD</span><span>Kubernetes</span>
@@ -346,7 +463,7 @@
             </div>
 
             <div class="card reveal">
-              <h3>Frontend (support)</h3>
+              <h3 data-i18n="skills.c6.h">Frontend (support)</h3>
               <div class="tags">
                 <span>Vue.js</span><span>Bootstrap</span><span>TypeScript</span
                 ><span>React</span>
@@ -356,12 +473,11 @@
         </div>
       </section>
 
-      <!-- EXPERIENCE -->
       <section class="section subtle" id="experience">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Experience</h2>
-            <p>
+            <h2 data-i18n="exp.h">Experience</h2>
+            <p data-i18n="exp.p">
               Selected experience aligned with backend, distributed systems, and
               performance.
             </p>
@@ -370,47 +486,65 @@
           <div class="timeline">
             <article class="t-item card reveal">
               <div class="t-top">
-                <h3>Software Engineer (Backend / Fullstack) — DocQ</h3>
-                <span class="t-date">Sep 2024 — Present</span>
+                <h3 data-i18n="exp.d1.h">
+                  Software Engineer (Backend / Fullstack) — DocQ
+                </h3>
+                <span class="t-date" data-i18n="exp.d1.d"
+                  >Sep 2024 — Present</span
+                >
               </div>
               <ul class="bullets">
-                <li>Distributed microservices in Python (FastAPI/Flask)</li>
-                <li>Async pipelines with Redis + Celery (queues/workers)</li>
-                <li>AI/LLM integrations enabling automation workflows</li>
-                <li>Dockerized deployments; Linux + AWS infrastructure</li>
+                <li data-i18n="exp.d1.b1">
+                  Distributed microservices in Python (FastAPI/Flask)
+                </li>
+                <li data-i18n="exp.d1.b2">
+                  Async pipelines with Redis + Celery (queues/workers)
+                </li>
+                <li data-i18n="exp.d1.b3">
+                  AI/LLM integrations enabling automation workflows
+                </li>
+                <li data-i18n="exp.d1.b4">
+                  Dockerized deployments; Linux + AWS infrastructure
+                </li>
               </ul>
             </article>
 
             <article class="t-item card reveal">
               <div class="t-top">
-                <h3>Research & Academic Systems — UPF</h3>
-                <span class="t-date">2022 — 2024</span>
+                <h3 data-i18n="exp.d2.h">Research & Academic Systems — UPF</h3>
+                <span class="t-date" data-i18n="exp.d2.d">2022 — 2024</span>
               </div>
               <ul class="bullets">
-                <li>
+                <li data-i18n="exp.d2.b1">
                   High-performance C++ genetic algorithm for university
                   timetabling
                 </li>
-                <li>Parallelism and optimization (OpenMP, multithreading)</li>
-                <li>
+                <li data-i18n="exp.d2.b2">
+                  Parallelism and optimization (OpenMP, multithreading)
+                </li>
+                <li data-i18n="exp.d2.b3">
                   Java web app (JSF/PrimeFaces/JasperReports) for academic
                   management
                 </li>
-                <li>Python validation scripts and structured JSON reporting</li>
+                <li data-i18n="exp.d2.b4">
+                  Python validation scripts and structured JSON reporting
+                </li>
               </ul>
             </article>
 
             <article class="t-item card reveal">
               <div class="t-top">
-                <h3>Teaching Assistant & Instructor — FabSoft</h3>
-                <span class="t-date">2023 — 2024</span>
+                <h3 data-i18n="exp.d3.h">
+                  Teaching Assistant & Instructor — FabSoft
+                </h3>
+                <span class="t-date" data-i18n="exp.d3.d">2023 — 2024</span>
               </div>
               <ul class="bullets">
-                <li>
+                <li data-i18n="exp.d3.b1">
                   Mentored 50+ students (competitive programming + web dev
                   “ZZ-On”)
                 </li>
-                <li>
+                <li data-i18n="exp.d3.b2">
                   Algorithms, data structures, OOP; PHP/JS projects; Python data
                   research
                 </li>
@@ -420,12 +554,13 @@
         </div>
       </section>
 
-      <!-- CERTIFICATIONS -->
       <section class="section" id="certs">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Certifications</h2>
-            <p>Verified Udemy certificates (IDs included).</p>
+            <h2 data-i18n="cert.h">Certifications</h2>
+            <p data-i18n="cert.p">
+              Verified Udemy certificates (IDs included).
+            </p>
           </div>
 
           <div class="grid-2">
@@ -464,51 +599,55 @@
         </div>
       </section>
 
-      <!-- EVENTS -->
       <section class="section subtle" id="events">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Events & Competitions</h2>
-            <p>Community and continuous learning.</p>
+            <h2 data-i18n="ev.h">Events & Competitions</h2>
+            <p data-i18n="ev.p">Community and continuous learning.</p>
           </div>
 
           <div class="grid-3">
             <article class="card reveal">
-              <h3>Competitive Programming</h3>
+              <h3 data-i18n="ev.c1.h">Competitive Programming</h3>
               <ul class="bullets">
-                <li>OBI (Brazilian Informatics Olympiad)</li>
-                <li>SBC/ICPC South America (multiple phases)</li>
-                <li>Beecrowd practice and mentoring</li>
+                <li data-i18n="ev.c1.b1">
+                  OBI (Brazilian Informatics Olympiad)
+                </li>
+                <li data-i18n="ev.c1.b2">
+                  SBC/ICPC South America (multiple phases)
+                </li>
+                <li data-i18n="ev.c1.b3">Beecrowd practice and mentoring</li>
               </ul>
             </article>
 
             <article class="card reveal">
-              <h3>Conferences</h3>
+              <h3 data-i18n="ev.c2.h">Conferences</h3>
               <ul class="bullets">
-                <li>The Developers Conference (TDC) — São Paulo</li>
-                <li>Gramado Summit</li>
-                <li>Porto Alegre Summit</li>
+                <li data-i18n="ev.c2.b1">
+                  The Developers Conference (TDC) — São Paulo
+                </li>
+                <li data-i18n="ev.c2.b2">Gramado Summit</li>
+                <li data-i18n="ev.c2.b3">Porto Alegre Summit</li>
               </ul>
             </article>
 
             <article class="card reveal">
-              <h3>Security & Community</h3>
+              <h3 data-i18n="ev.c3.h">Security & Community</h3>
               <ul class="bullets">
-                <li>BSides BSB — Brasília</li>
-                <li>Tech meetups and workshops</li>
-                <li>Continuous learning projects</li>
+                <li data-i18n="ev.c3.b1">BSides BSB — Brasília</li>
+                <li data-i18n="ev.c3.b2">Tech meetups and workshops</li>
+                <li data-i18n="ev.c3.b3">Continuous learning projects</li>
               </ul>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- CONTACT -->
       <section class="section subtle" id="contact">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Contact</h2>
-            <p>
+            <h2 data-i18n="ct.h">Contact</h2>
+            <p data-i18n="ct.p">
               Open to remote opportunities and backend engineering challenges.
             </p>
           </div>
@@ -516,13 +655,13 @@
           <div class="contact-card card reveal">
             <div class="contact-row">
               <div>
-                <p class="meta-title">Email</p>
+                <p class="meta-title" data-i18n="ct.e.t">Email</p>
                 <a class="meta-link" href="mailto:guiitaglietti@gmail.com"
                   >guiitaglietti@gmail.com</a
                 >
               </div>
               <div>
-                <p class="meta-title">LinkedIn</p>
+                <p class="meta-title" data-i18n="ct.l.t">LinkedIn</p>
                 <a
                   class="meta-link"
                   href="https://linkedin.com/in/guilherme-taglietti"
@@ -533,7 +672,7 @@
                 </a>
               </div>
               <div>
-                <p class="meta-title">GitHub</p>
+                <p class="meta-title" data-i18n="ct.g.t">GitHub</p>
                 <a
                   class="meta-link"
                   href="https://github.com/GuiTaglietti"
@@ -545,7 +684,7 @@
               </div>
             </div>
 
-            <p class="muted small-note">
+            <p class="muted small-note" data-i18n="ct.note">
               Prefer email for first contact. For code samples, check pinned
               repositories on GitHub.
             </p>
@@ -556,7 +695,7 @@
       <footer class="footer">
         <div class="container footer-inner">
           <p>© <span id="year"></span> Guilherme Martinelli Taglietti</p>
-          <a href="#top" class="back-top">Back to top</a>
+          <a href="#top" class="back-top" data-i18n="footer.top">Back to top</a>
         </div>
       </footer>
 
