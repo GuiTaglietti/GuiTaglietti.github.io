@@ -7,23 +7,30 @@
       name="description"
       content="Guilherme Martinelli Taglietti — Senior Backend Software Engineer focused on Distributed Systems, AI/LLM Integrations, and Cloud Infrastructure (Azure & AWS)."
     />
-    <meta name="theme-color" content="#06070a" />
+    <meta name="theme-color" content="#0a0a0c" />
     <meta name="color-scheme" content="dark light" />
 
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self' data:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; font-src 'self' data: https://fonts.gstatic.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
     />
 
     <meta property="og:title" content="Guilherme Martinelli Taglietti — Senior Backend Software Engineer" />
-    <meta property="og:description" content="Distributed Systems • Python Microservices • AI/LLM Integrations • Azure & AWS Cloud Infrastructure" />
+    <meta property="og:description" content="Distributed Systems · Python Microservices · AI/LLM · Azure & AWS Cloud Infrastructure" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/og-image.png" />
 
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="apple-touch-icon" href="assets/favicon.png" />
 
-    <title>Guilherme M. Taglietti — Senior Backend Software Engineer</title>
+    <title>Guilherme M. Taglietti — Backend Software Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="preload" href="styles.css" as="style" />
     <link rel="stylesheet" href="styles.css" />
@@ -47,18 +54,42 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="bg-grid" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb--3" aria-hidden="true"></div>
+    <div class="bg" aria-hidden="true">
+      <div class="bg-grid"></div>
+      <div class="bg-noise"></div>
+      <div class="bg-glow bg-glow--1"></div>
+      <div class="bg-glow bg-glow--2"></div>
+    </div>
+
+    <div class="statusbar" aria-hidden="true">
+      <div class="container statusbar__inner">
+        <span class="sb-cell sb-left">
+          <span class="sb-dot"></span>
+          <span class="mono">SYSTEM // ONLINE</span>
+        </span>
+        <span class="sb-cell sb-mid mono">
+          <span class="sb-key">UTC</span>
+          <span id="utcClock">--:--:--</span>
+          <span class="sb-sep">·</span>
+          <span class="sb-key">LOC</span>
+          <span>BR-RS</span>
+          <span class="sb-sep">·</span>
+          <span class="sb-key">REL</span>
+          <span>v2025.05</span>
+        </span>
+        <span class="sb-cell sb-right mono">
+          <span class="sb-prompt">~$</span>
+          <span>guilherme.taglietti</span>
+          <span class="sb-cursor">▍</span>
+        </span>
+      </div>
+    </div>
 
     <header class="site-header" id="top">
       <div class="container header-inner">
         <a class="brand" href="#top" aria-label="Go to top">
-          <span class="brand-mark" aria-hidden="true">
-            <span class="brand-dot"></span>
-          </span>
-          <span class="brand-text">guilherme<span class="brand-accent">.dev</span></span>
+          <span class="brand-mark mono">[<span class="brand-mark__inner">gt</span>]</span>
+          <span class="brand-text mono"><span class="brand-name">guilherme</span><span class="brand-accent">.dev</span></span>
         </a>
 
         <nav class="nav" aria-label="Primary navigation">
@@ -67,34 +98,30 @@
             <span class="hamburger" aria-hidden="true"></span>
           </button>
 
-          <ul class="nav-menu" id="navMenu">
-            <li><a href="#about" data-i18n="nav.about">About</a></li>
-            <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
-            <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
-            <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-            <li><a href="#certs" data-i18n="nav.certs">Certifications</a></li>
-            <li><a class="nav-cta" href="#contact" data-i18n="nav.contact">Contact</a></li>
+          <ul class="nav-menu mono" id="navMenu">
+            <li><a href="#about"><span class="nav-num">01</span><span data-i18n="nav.about">About</span></a></li>
+            <li><a href="#skills"><span class="nav-num">02</span><span data-i18n="nav.skills">Skills</span></a></li>
+            <li><a href="#experience"><span class="nav-num">03</span><span data-i18n="nav.experience">Experience</span></a></li>
+            <li><a href="#projects"><span class="nav-num">04</span><span data-i18n="nav.projects">Projects</span></a></li>
+            <li><a href="#certs"><span class="nav-num">05</span><span data-i18n="nav.certs">Certifications</span></a></li>
+            <li><a class="nav-cta" href="#contact"><span class="nav-num">06</span><span data-i18n="nav.contact">Contact</span></a></li>
           </ul>
         </nav>
 
         <div class="header-actions">
-          <button class="icon-btn" id="langToggle" type="button" aria-label="Toggle language">
+          <button class="icon-btn icon-btn--lang mono" id="langToggle" type="button" aria-label="Toggle language">
             <span class="icon-btn__flag" id="langFlag" aria-hidden="true">🇺🇸</span>
             <span class="icon-btn__label" data-i18n="header.lang">EN</span>
           </button>
 
-          <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark/light theme">
-            <span class="icon-btn__icon icon-btn__icon--moon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                <path d="M21 13.2A8.6 8.6 0 0 1 10.8 3a7.2 7.2 0 1 0 10.2 10.2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </span>
-            <span class="icon-btn__icon icon-btn__icon--sun" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.8" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-              </svg>
-            </span>
+          <button class="icon-btn icon-btn--theme" id="themeToggle" type="button" aria-label="Toggle dark/light theme">
+            <svg class="icn-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+              <path d="M21 13.2A8.6 8.6 0 0 1 10.8 3a7.2 7.2 0 1 0 10.2 10.2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg class="icn-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.4" stroke="currentColor" stroke-width="1.6" />
+              <path d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
           </button>
         </div>
       </div>
@@ -103,52 +130,46 @@
     <main id="main">
       <section class="hero">
         <div class="container hero-inner">
-          <div class="hero-content reveal">
-            <div class="hero-status">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span data-i18n="hero.status">Available for new opportunities</span>
+          <div class="hero-content">
+            <div class="hero-meta-top mono reveal">
+              <span class="meta-tag"><span class="meta-tag__slash">//</span> id <span class="hl">GT/SR-25</span></span>
+              <span class="meta-tag"><span class="meta-tag__slash">//</span> role <span class="hl">backend.engineer</span></span>
+              <span class="meta-tag"><span class="meta-tag__slash">//</span> stack <span class="hl">v5.0+</span></span>
             </div>
 
-            <p class="kicker" data-i18n="hero.kicker">Senior Backend Software Engineer</p>
+            <p class="kicker mono reveal" data-i18n="hero.kicker">Senior Backend Software Engineer</p>
 
-            <h1 class="hero-title">
-              <span data-i18n="hero.title.l1">Building</span>
-              <span class="accent" data-i18n="hero.title.l2">distributed systems</span>
-              <span data-i18n="hero.title.l3">at the intersection of</span>
-              <span class="accent accent--alt" data-i18n="hero.title.l4">AI &amp; cloud infrastructure</span>
+            <h1 class="hero-title reveal">
+              <span class="hl-line"><span data-i18n="hero.title.l1">Building</span></span>
+              <span class="hl-line"><em class="accent" data-i18n="hero.title.l2">distributed systems</em></span>
+              <span class="hl-line"><span data-i18n="hero.title.l3">at the intersection of</span></span>
+              <span class="hl-line"><em class="accent accent--alt" data-i18n="hero.title.l4">AI &amp; cloud infrastructure</em></span>
             </h1>
 
-            <p class="lead" data-i18n="hero.lead">
-              Senior Backend Software Engineer with 5+ years building scalable microservice
-              architectures, AI-driven systems, and production-grade cloud platforms across
-              Azure and AWS. Specialized in Python, asynchronous pipelines, LLM integrations,
-              and high-performance computing.
+            <p class="lead reveal" data-i18n="hero.lead">
+              Senior Backend Software Engineer with 5+ years building scalable microservice architectures, AI-driven systems, and production-grade cloud platforms across Azure and AWS. Specialized in Python, asynchronous pipelines, LLM integrations, and high-performance computing.
             </p>
 
-            <div class="hero-meta">
-              <div class="hero-meta__item">
-                <span class="hero-meta__label" data-i18n="hero.m1.l">Location</span>
-                <span class="hero-meta__value" data-i18n="hero.m1.v">Brazil — Remote / Relocation</span>
+            <dl class="hero-meta mono reveal">
+              <div class="hero-meta__row">
+                <dt data-i18n="hero.m1.l">Location</dt>
+                <dd><span class="meta-arrow" aria-hidden="true">→</span><span data-i18n="hero.m1.v">Brazil — Remote</span></dd>
               </div>
-              <div class="hero-meta__item">
-                <span class="hero-meta__label" data-i18n="hero.m2.l">Focus</span>
-                <span class="hero-meta__value" data-i18n="hero.m2.v">Backend · Distributed · AI · Cloud</span>
+              <div class="hero-meta__row">
+                <dt data-i18n="hero.m2.l">Focus</dt>
+                <dd><span class="meta-arrow" aria-hidden="true">→</span><span data-i18n="hero.m2.v">Backend · Distributed · AI · Cloud</span></dd>
               </div>
-              <div class="hero-meta__item">
-                <span class="hero-meta__label" data-i18n="hero.m3.l">Stack</span>
-                <span class="hero-meta__value" data-i18n="hero.m3.v">Python · FastAPI · Azure · AWS</span>
+              <div class="hero-meta__row">
+                <dt data-i18n="hero.m3.l">Stack</dt>
+                <dd><span class="meta-arrow" aria-hidden="true">→</span><span data-i18n="hero.m3.v">Python · FastAPI · Azure · AWS</span></dd>
               </div>
-            </div>
+            </dl>
 
-            <div class="hero-actions">
+            <div class="hero-actions reveal">
               <div class="cv-dropdown" id="cvDropdown">
                 <button class="btn primary cv-trigger" id="cvTrigger" type="button" aria-haspopup="true" aria-expanded="false">
                   <span data-i18n="hero.cv">Download CV</span>
-                  <span class="cv-caret" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-                      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
+                  <span class="cv-caret" aria-hidden="true">▾</span>
                 </button>
 
                 <div class="cv-menu" id="cvMenu" role="menu" aria-label="CV options">
@@ -163,129 +184,116 @@
                 </div>
               </div>
 
-              <a class="btn ghost" href="#contact" data-i18n="hero.contact">Get in touch</a>
+              <a class="btn ghost" href="#contact">
+                <span data-i18n="hero.contact">Get in touch</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </a>
             </div>
 
-            <div class="quick-links">
-              <a href="https://github.com/GuiTaglietti" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <span class="dot" aria-hidden="true">•</span>
-              <a href="https://linkedin.com/in/guilherme-taglietti" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <span class="dot" aria-hidden="true">•</span>
-              <a href="https://judge.beecrowd.com/pt/profile/625773" target="_blank" rel="noopener noreferrer">Beecrowd</a>
-            </div>
+            <ul class="quick-links mono reveal">
+              <li><a href="https://github.com/GuiTaglietti" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://linkedin.com/in/guilherme-taglietti" target="_blank" rel="noopener noreferrer">LinkedIn<span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://judge.beecrowd.com/pt/profile/625773" target="_blank" rel="noopener noreferrer">Beecrowd<span aria-hidden="true">↗</span></a></li>
+            </ul>
           </div>
 
-          <aside class="terminal reveal" aria-label="Terminal">
+          <aside class="terminal reveal" aria-label="Terminal preview">
             <div class="terminal__bar">
               <span class="terminal__dot terminal__dot--r"></span>
               <span class="terminal__dot terminal__dot--y"></span>
               <span class="terminal__dot terminal__dot--g"></span>
-              <span class="terminal__title">~/guilherme — zsh</span>
+              <span class="terminal__title mono">~/guilherme — zsh</span>
             </div>
             <div class="terminal__body">
-<pre><span class="t-prompt">$</span> <span class="t-cmd">whoami</span>
-<span class="t-out">guilherme.taglietti</span>
-
-<span class="t-prompt">$</span> <span class="t-cmd">cat role.json</span>
-<span class="t-out">{
-  <span class="t-key">"title"</span>: <span class="t-str">"Senior Backend Software Engineer"</span>,
-  <span class="t-key">"experience"</span>: <span class="t-str">"5+ years"</span>,
-  <span class="t-key">"focus"</span>: [<span class="t-str">"distributed_systems"</span>, <span class="t-str">"ai"</span>, <span class="t-str">"cloud"</span>],
-  <span class="t-key">"languages"</span>: [<span class="t-str">"python"</span>, <span class="t-str">"c++"</span>, <span class="t-str">"typescript"</span>],
-  <span class="t-key">"cloud"</span>: [<span class="t-str">"azure"</span>, <span class="t-str">"aws"</span>],
-  <span class="t-key">"available"</span>: <span class="t-bool">true</span>
-}</span>
-
-<span class="t-prompt">$</span> <span class="t-cmd">echo $STATUS</span>
-<span class="t-out">shipping production systems<span class="t-cursor">▍</span></span></pre>
+              <pre class="t-pre mono"><span id="terminalOutput"></span><span class="t-cursor" aria-hidden="true">▍</span></pre>
             </div>
           </aside>
         </div>
       </section>
 
+      <section class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <ul class="ticker__list mono">
+            <li>Python</li><li>FastAPI</li><li>GraphQL</li><li>RabbitMQ</li><li>Redis</li><li>Azure Service Bus</li><li>Celery</li><li>PostgreSQL</li><li>CosmosDB</li><li>Docker</li><li>Ansible</li><li>OpenTelemetry</li><li>Graylog</li><li>PostHog</li><li>LangChain</li><li>LangGraph</li><li>RAG</li><li>Vector DBs</li><li>C++</li><li>OpenMP</li><li>Genetic Algorithms</li><li>Microservices</li><li>Distributed Systems</li><li>Event-Driven</li>
+          </ul>
+          <ul class="ticker__list mono" aria-hidden="true">
+            <li>Python</li><li>FastAPI</li><li>GraphQL</li><li>RabbitMQ</li><li>Redis</li><li>Azure Service Bus</li><li>Celery</li><li>PostgreSQL</li><li>CosmosDB</li><li>Docker</li><li>Ansible</li><li>OpenTelemetry</li><li>Graylog</li><li>PostHog</li><li>LangChain</li><li>LangGraph</li><li>RAG</li><li>Vector DBs</li><li>C++</li><li>OpenMP</li><li>Genetic Algorithms</li><li>Microservices</li><li>Distributed Systems</li><li>Event-Driven</li>
+          </ul>
+        </div>
+      </section>
+
       <section class="section" id="about">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="about.tag">// about</span>
-            <h2 data-i18n="about.h">About</h2>
-            <p data-i18n="about.p">
-              Bachelor's in Computer Science (UPF). Backend engineer with 5+ years
-              of experience building scalable distributed systems, AI/LLM integrations,
-              and high-performance algorithms across cloud-native environments.
+          <header class="section-head reveal">
+            <span class="section-num mono">[01]</span>
+            <span class="section-tag mono" data-i18n="about.tag">// about</span>
+            <h2 class="section-title"><span data-i18n="about.h">About</span></h2>
+            <p class="section-desc" data-i18n="about.p">
+              Bachelor's in Computer Science (UPF). Backend engineer with 5+ years of experience building scalable distributed systems, AI/LLM integrations, and high-performance algorithms across cloud-native environments.
             </p>
-          </div>
+          </header>
 
           <div class="grid-3">
-            <article class="card reveal">
-              <div class="card-icon" aria-hidden="true">⌬</div>
+            <article class="card card--about reveal">
+              <span class="card-num mono">[A]</span>
               <h3 data-i18n="about.c1.h">Backend &amp; Distributed Systems</h3>
               <p data-i18n="about.c1.p">
-                Microservices, event-driven architectures (RabbitMQ, Azure Service Bus),
-                async pipelines, queues, and workers — built for reliability and scale.
+                Microservices, event-driven architectures (RabbitMQ, Azure Service Bus), async pipelines, queues, and workers — built for reliability and scale.
               </p>
             </article>
 
-            <article class="card reveal">
-              <div class="card-icon" aria-hidden="true">◈</div>
+            <article class="card card--about reveal">
+              <span class="card-num mono">[B]</span>
               <h3 data-i18n="about.c2.h">AI &amp; LLM Engineering</h3>
               <p data-i18n="about.c2.p">
-                Production LLM workflows, RAG pipelines, vector search, AI agents,
-                embeddings, and prompt engineering integrated into real product systems.
+                Production LLM workflows, RAG pipelines, vector search, AI agents, embeddings, and prompt engineering integrated into real product systems.
               </p>
             </article>
 
-            <article class="card reveal">
-              <div class="card-icon" aria-hidden="true">◇</div>
+            <article class="card card--about reveal">
+              <span class="card-num mono">[C]</span>
               <h3 data-i18n="about.c3.h">Cloud &amp; Infrastructure</h3>
               <p data-i18n="about.c3.p">
-                Azure (CosmosDB, Service Bus, Container Apps) and AWS deployments,
-                Ansible IaC, observability with OpenTelemetry, Graylog, and PostHog.
+                Azure (CosmosDB, Service Bus, Container Apps) and AWS deployments, Ansible IaC, observability with OpenTelemetry, Graylog, and PostHog.
               </p>
             </article>
           </div>
 
-          <div class="education-wrap">
-            <article class="card reveal education-card">
-              <div class="education-top">
-                <h3 data-i18n="edu.h">Education</h3>
-                <span class="edu-pill" data-i18n="edu.pill">BSc · GPA 9.3</span>
-              </div>
-              <p class="muted edu-sub" data-i18n="edu.sub">
-                Bachelor's in Computer Science — Universidade de Passo Fundo (UPF) · 2022–2025
-              </p>
-              <ul class="bullets">
-                <li data-i18n="edu.b1">
-                  Strong foundation in algorithms, data structures, operating systems,
-                  networks, databases, software engineering, and distributed systems.
-                </li>
-                <li data-i18n="edu.b2">
-                  Capstone (TCC): published research and C++ implementation of new heuristic
-                  initializations for a genetic algorithm generating university timetables.
-                </li>
-                <li data-i18n="edu.b3">
-                  Improved final results by ~50% through heuristic initialization,
-                  parallel optimization, and performance-focused engineering.
-                </li>
-              </ul>
-            </article>
-          </div>
+          <article class="card education-card reveal">
+            <header class="education-top">
+              <h3 data-i18n="edu.h">Education</h3>
+              <span class="edu-pill mono" data-i18n="edu.pill">Bachelor's degree</span>
+            </header>
+            <p class="muted edu-sub mono" data-i18n="edu.sub">
+              Bachelor's in Computer Science — Universidade de Passo Fundo (UPF) · 2022–2025
+            </p>
+            <ul class="bullets">
+              <li data-i18n="edu.b1">Strong foundation in algorithms, data structures, operating systems, networks, databases, software engineering, and distributed systems.</li>
+              <li data-i18n="edu.b2">Capstone (TCC): published research and C++ implementation of new heuristic initializations for a genetic algorithm generating university timetables.</li>
+              <li data-i18n="edu.b3">Improved final results by ~50% through heuristic initialization, parallel optimization, and performance-focused engineering.</li>
+            </ul>
+          </article>
         </div>
       </section>
 
       <section class="section subtle" id="skills">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="skills.tag">// skills</span>
-            <h2 data-i18n="skills.h">Technical Stack</h2>
-            <p data-i18n="skills.p">
-              Battle-tested in production. Focused on backend engineering, reliability,
-              and scalable architecture across cloud-native environments.
+          <header class="section-head reveal">
+            <span class="section-num mono">[02]</span>
+            <span class="section-tag mono" data-i18n="skills.tag">// skills</span>
+            <h2 class="section-title"><span data-i18n="skills.h">Technical Stack</span></h2>
+            <p class="section-desc" data-i18n="skills.p">
+              Battle-tested in production. Focused on backend engineering, reliability, and scalable architecture across cloud-native environments.
             </p>
-          </div>
+          </header>
 
-          <div class="skill-grid">
-            <div class="card reveal">
-              <h3 data-i18n="skills.c1.h">Backend</h3>
+          <div class="bento">
+            <div class="bento__cell card reveal" data-cell="1">
+              <header class="bento__head">
+                <span class="bento__num mono">01</span>
+                <h3 data-i18n="skills.c1.h">Backend</h3>
+                <span class="bento__count mono">14</span>
+              </header>
               <div class="tags">
                 <span>Python</span><span>FastAPI</span><span>Flask</span>
                 <span>Laravel</span><span>Yii</span><span>GraphQL</span>
@@ -295,8 +303,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c2.h">AI &amp; Data</h3>
+            <div class="bento__cell card reveal" data-cell="2">
+              <header class="bento__head">
+                <span class="bento__num mono">02</span>
+                <h3 data-i18n="skills.c2.h">AI &amp; Data</h3>
+                <span class="bento__count mono">11</span>
+              </header>
               <div class="tags">
                 <span data-i18n="skills.llm">LLM Integrations</span>
                 <span>Claude</span><span>GPT</span>
@@ -308,8 +320,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c3.h">Cloud &amp; DevOps</h3>
+            <div class="bento__cell card reveal" data-cell="3">
+              <header class="bento__head">
+                <span class="bento__num mono">03</span>
+                <h3 data-i18n="skills.c3.h">Cloud &amp; DevOps</h3>
+                <span class="bento__count mono">13</span>
+              </header>
               <div class="tags">
                 <span>Azure</span><span>CosmosDB</span><span>Container Apps</span>
                 <span>Azure CLI</span><span>AWS</span><span>S3</span>
@@ -319,8 +335,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c4.h">Observability</h3>
+            <div class="bento__cell card reveal" data-cell="4">
+              <header class="bento__head">
+                <span class="bento__num mono">04</span>
+                <h3 data-i18n="skills.c4.h">Observability</h3>
+                <span class="bento__count mono">5</span>
+              </header>
               <div class="tags">
                 <span>OpenTelemetry</span><span>Graylog</span>
                 <span>PostHog</span>
@@ -329,8 +349,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c5.h">Databases</h3>
+            <div class="bento__cell card reveal" data-cell="5">
+              <header class="bento__head">
+                <span class="bento__num mono">05</span>
+                <h3 data-i18n="skills.c5.h">Databases</h3>
+                <span class="bento__count mono">8</span>
+              </header>
               <div class="tags">
                 <span>PostgreSQL</span><span>MySQL</span><span>Oracle</span>
                 <span>MongoDB</span><span>CosmosDB</span>
@@ -339,8 +363,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c6.h">Performance &amp; Algorithms</h3>
+            <div class="bento__cell card reveal" data-cell="6">
+              <header class="bento__head">
+                <span class="bento__num mono">06</span>
+                <h3 data-i18n="skills.c6.h">Performance &amp; Algorithms</h3>
+                <span class="bento__count mono">6</span>
+              </header>
               <div class="tags">
                 <span>C++</span><span>OpenMP</span>
                 <span data-i18n="skills.mt">Multithreading</span>
@@ -350,8 +378,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c7.h">Frontend</h3>
+            <div class="bento__cell card reveal" data-cell="7">
+              <header class="bento__head">
+                <span class="bento__num mono">07</span>
+                <h3 data-i18n="skills.c7.h">Frontend</h3>
+                <span class="bento__count mono">8</span>
+              </header>
               <div class="tags">
                 <span>React.js</span><span>Vue.js</span><span>Redux</span>
                 <span>TypeScript</span><span>Tailwind CSS</span>
@@ -359,8 +391,12 @@
               </div>
             </div>
 
-            <div class="card reveal">
-              <h3 data-i18n="skills.c8.h">Practices</h3>
+            <div class="bento__cell card reveal" data-cell="8">
+              <header class="bento__head">
+                <span class="bento__num mono">08</span>
+                <h3 data-i18n="skills.c8.h">Practices</h3>
+                <span class="bento__count mono">6</span>
+              </header>
               <div class="tags">
                 <span data-i18n="skills.dist">Distributed Systems</span>
                 <span data-i18n="skills.arch">Software Architecture</span>
@@ -375,56 +411,43 @@
 
       <section class="section" id="experience">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="exp.tag">// experience</span>
-            <h2 data-i18n="exp.h">Experience</h2>
-            <p data-i18n="exp.p">
-              Selected experience aligned with backend engineering, distributed systems,
-              cloud infrastructure, and AI integrations.
+          <header class="section-head reveal">
+            <span class="section-num mono">[03]</span>
+            <span class="section-tag mono" data-i18n="exp.tag">// experience</span>
+            <h2 class="section-title"><span data-i18n="exp.h">Experience</span></h2>
+            <p class="section-desc" data-i18n="exp.p">
+              Selected experience aligned with backend engineering, distributed systems, cloud infrastructure, and AI integrations.
             </p>
-          </div>
+          </header>
 
           <div class="timeline">
             <article class="t-item card reveal">
-              <div class="t-top">
-                <h3 data-i18n="exp.d0.h">Senior Software Engineer — Command|Link</h3>
-                <span class="t-date" data-i18n="exp.d0.d">Mar 2025 — Present</span>
-              </div>
-              <p class="t-loc" data-i18n="exp.d0.loc">USA · Remote · AI Team</p>
+              <header class="t-top">
+                <div class="t-headline">
+                  <span class="t-status mono is-live" aria-label="Current role"><span class="t-status-dot"></span>LIVE</span>
+                  <h3 data-i18n="exp.d0.h">Senior Software Engineer — Command|Link</h3>
+                </div>
+                <span class="t-date mono" data-i18n="exp.d0.d">Mar 2025 — Present</span>
+              </header>
+              <p class="t-loc mono" data-i18n="exp.d0.loc">USA · Remote · AI Team</p>
               <ul class="bullets">
-                <li data-i18n="exp.d0.b1">
-                  Drive backend architecture decisions, engineering metrics, and cross-service
-                  integrations within a large-scale distributed platform.
-                </li>
-                <li data-i18n="exp.d0.b2">
-                  Build Python/FastAPI microservices with RabbitMQ, Azure Service Bus, and Redis
-                  for asynchronous, event-driven communication.
-                </li>
-                <li data-i18n="exp.d0.b3">
-                  Develop AI services for reporting, vector search, embeddings, and intelligence
-                  workflows; design GraphQL (primary) and REST APIs across services.
-                </li>
-                <li data-i18n="exp.d0.b4">
-                  Build inbound/outbound integrations with Jira, ServiceNow, and PostHog for
-                  incident management, ticketing, and analytics pipelines.
-                </li>
-                <li data-i18n="exp.d0.b5">
-                  Operate Azure ecosystem (CosmosDB, Service Bus, Container Apps); automate
-                  deployments with Ansible (IaC) and CI/CD via GitHub Actions and Jenkins.
-                </li>
-                <li data-i18n="exp.d0.b6">
-                  Maintain observability with OpenTelemetry, Graylog, and PostHog;
-                  track engineering metrics and software quality across the team.
-                </li>
+                <li data-i18n="exp.d0.b1">Drive backend architecture decisions, engineering metrics, and cross-service integrations within a large-scale distributed platform.</li>
+                <li data-i18n="exp.d0.b2">Build Python/FastAPI microservices with RabbitMQ, Azure Service Bus, and Redis for asynchronous, event-driven communication.</li>
+                <li data-i18n="exp.d0.b3">Develop AI services for reporting, vector search, embeddings, and intelligence workflows; design GraphQL (primary) and REST APIs across services.</li>
+                <li data-i18n="exp.d0.b4">Build inbound/outbound integrations with Jira, ServiceNow, and PostHog for incident management, ticketing, and analytics pipelines.</li>
+                <li data-i18n="exp.d0.b5">Operate Azure ecosystem (CosmosDB, Service Bus, Container Apps); automate deployments with Ansible (IaC) and CI/CD via GitHub Actions and Jenkins.</li>
+                <li data-i18n="exp.d0.b6">Maintain observability with OpenTelemetry, Graylog, and PostHog; track engineering metrics and software quality across the team.</li>
               </ul>
             </article>
 
             <article class="t-item card reveal">
-              <div class="t-top">
-                <h3 data-i18n="exp.d1.h">Software Engineer (Backend / Fullstack) — DocQ</h3>
-                <span class="t-date" data-i18n="exp.d1.d">Sep 2024 — Mar 2025</span>
-              </div>
-              <p class="t-loc" data-i18n="exp.d1.loc">Dover, Delaware, USA · Remote</p>
+              <header class="t-top">
+                <div class="t-headline">
+                  <h3 data-i18n="exp.d1.h">Software Engineer (Backend / Fullstack) — DocQ</h3>
+                </div>
+                <span class="t-date mono" data-i18n="exp.d1.d">Sep 2024 — Mar 2025</span>
+              </header>
+              <p class="t-loc mono" data-i18n="exp.d1.loc">Dover, Delaware, USA · Remote</p>
               <ul class="bullets">
                 <li data-i18n="exp.d1.b1">Distributed microservices in Python (FastAPI/Flask) on AWS infrastructure.</li>
                 <li data-i18n="exp.d1.b2">Async pipelines with Redis + Celery (queues, workers, retries).</li>
@@ -435,11 +458,13 @@
             </article>
 
             <article class="t-item card reveal">
-              <div class="t-top">
-                <h3 data-i18n="exp.d2.h">Software Developer — UPF FabSoft</h3>
-                <span class="t-date" data-i18n="exp.d2.d">Jul 2022 — Sep 2024</span>
-              </div>
-              <p class="t-loc" data-i18n="exp.d2.loc">Universidade de Passo Fundo · Research Lab</p>
+              <header class="t-top">
+                <div class="t-headline">
+                  <h3 data-i18n="exp.d2.h">Software Developer — UPF FabSoft</h3>
+                </div>
+                <span class="t-date mono" data-i18n="exp.d2.d">Jul 2022 — Sep 2024</span>
+              </header>
+              <p class="t-loc mono" data-i18n="exp.d2.loc">Universidade de Passo Fundo · Research Lab</p>
               <ul class="bullets">
                 <li data-i18n="exp.d2.b1">High-performance C++ genetic algorithm for university timetabling (OpenMP, multithreading).</li>
                 <li data-i18n="exp.d2.b2">Heuristic initialization strategies improved results by ~50%.</li>
@@ -450,11 +475,13 @@
             </article>
 
             <article class="t-item card reveal">
-              <div class="t-top">
-                <h3 data-i18n="exp.d3.h">Teaching Assistant &amp; Instructor — UPF</h3>
-                <span class="t-date" data-i18n="exp.d3.d">Jan 2022 — Jul 2022</span>
-              </div>
-              <p class="t-loc" data-i18n="exp.d3.loc">Universidade de Passo Fundo</p>
+              <header class="t-top">
+                <div class="t-headline">
+                  <h3 data-i18n="exp.d3.h">Teaching Assistant &amp; Instructor — UPF</h3>
+                </div>
+                <span class="t-date mono" data-i18n="exp.d3.d">Jan 2022 — Jul 2022</span>
+              </header>
+              <p class="t-loc mono" data-i18n="exp.d3.loc">Universidade de Passo Fundo</p>
               <ul class="bullets">
                 <li data-i18n="exp.d3.b1">Mentored 30+ students in competitive programming and the ZZ-On web development course.</li>
                 <li data-i18n="exp.d3.b2">PHP/JavaScript projects; data science research with Python, Pandas, NumPy.</li>
@@ -466,32 +493,28 @@
 
       <section class="section subtle" id="projects">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="proj.tag">// projects</span>
-            <h2 data-i18n="proj.h">Founding Projects</h2>
-            <p data-i18n="proj.p">
-              SaaS products built from the ground up — covering backend architecture,
-              AI engineering, infrastructure, and end-to-end product delivery.
+          <header class="section-head reveal">
+            <span class="section-num mono">[04]</span>
+            <span class="section-tag mono" data-i18n="proj.tag">// projects</span>
+            <h2 class="section-title"><span data-i18n="proj.h">Founding Projects</span></h2>
+            <p class="section-desc" data-i18n="proj.p">
+              SaaS products built from the ground up — covering backend architecture, AI engineering, infrastructure, and end-to-end product delivery.
             </p>
-          </div>
+          </header>
 
-          <div class="grid-2">
-            <article class="card reveal project-card">
-              <div class="project-head">
-                <div>
-                  <h3>Acordify</h3>
-                  <p class="muted" data-i18n="proj.acordify.role">Founding Engineer · Jan 2025 — Present</p>
-                </div>
-                <a class="project-link" href="https://acordify.com.br" target="_blank" rel="noopener noreferrer" aria-label="Visit Acordify">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
+          <div class="projects">
+            <article class="card project-card reveal">
+              <span class="project-num mono">#001</span>
+              <header class="project-head">
+                <h3 class="project-name">Acordify</h3>
+                <a class="project-link mono" href="https://acordify.com.br" target="_blank" rel="noopener noreferrer" aria-label="Visit Acordify">
+                  <span>visit</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
-              </div>
+              </header>
+              <p class="project-role mono muted" data-i18n="proj.acordify.role">Founding Engineer · Jan 2025 — Present</p>
               <p class="project-desc" data-i18n="proj.acordify.desc">
-                B2B SaaS for legal contract management and judicial process automation.
-                Contract generation and comparison, risk analysis, gap detection,
-                process monitoring, AI-driven hearing transcription, and collaborative workspaces.
+                B2B SaaS for legal contract management and judicial process automation. Contract generation and comparison, risk analysis, gap detection, process monitoring, AI-driven hearing transcription, and collaborative workspaces.
               </p>
               <div class="tags">
                 <span>Python</span><span>FastAPI</span><span>Claude</span><span>GPT</span>
@@ -500,17 +523,14 @@
               </div>
             </article>
 
-            <article class="card reveal project-card">
-              <div class="project-head">
-                <div>
-                  <h3>Kyntra</h3>
-                  <p class="muted" data-i18n="proj.kyntra.role">Co-founder &amp; Software Engineer</p>
-                </div>
-              </div>
+            <article class="card project-card reveal">
+              <span class="project-num mono">#002</span>
+              <header class="project-head">
+                <h3 class="project-name">Kyntra</h3>
+              </header>
+              <p class="project-role mono muted" data-i18n="proj.kyntra.role">Co-founder &amp; Software Engineer</p>
               <p class="project-desc" data-i18n="proj.kyntra.desc">
-                AI-driven Red Team &amp; security SaaS for pentesting automation, attack vector
-                exploration, and intelligent workflows. Built end-to-end with a small team —
-                backend, AI agents, frontend, payments, i18n, and production deployments.
+                AI-driven Red Team &amp; security SaaS for pentesting automation, attack vector exploration, and intelligent workflows. Built end-to-end with a small team — backend, AI agents, frontend, payments, i18n, and production deployments.
               </p>
               <div class="tags">
                 <span>Python</span><span>FastAPI</span><span>LangChain</span>
@@ -525,43 +545,58 @@
 
       <section class="section" id="certs">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="cert.tag">// certifications</span>
-            <h2 data-i18n="cert.h">Certifications</h2>
-            <p data-i18n="cert.p">Verified Udemy certificates with credential IDs.</p>
-          </div>
+          <header class="section-head reveal">
+            <span class="section-num mono">[05]</span>
+            <span class="section-tag mono" data-i18n="cert.tag">// certifications</span>
+            <h2 class="section-title"><span data-i18n="cert.h">Certifications</span></h2>
+            <p class="section-desc" data-i18n="cert.p">Verified Udemy certificates with credential IDs.</p>
+          </header>
 
-          <div class="grid-2">
-            <article class="card reveal">
-              <h3>Modern Advanced C++ Course</h3>
-              <p class="muted">Udemy · UC-439ae987-261e-45a3-bc13-7ad6f70a321c</p>
-            </article>
-
-            <article class="card reveal">
-              <h3>Mastering Data Structures &amp; Algorithms using C and C++</h3>
-              <p class="muted">Udemy · UC-ab722506-1517-4637-b5a2-bc858cd7170f</p>
-            </article>
-
-            <article class="card reveal">
-              <h3>TensorFlow: Machine Learning and Deep Learning with Python</h3>
-              <p class="muted">Udemy · UC-43ad56a5-618f-45cf-a688-e8d97d337399</p>
-            </article>
-
-            <article class="card reveal">
-              <h3>Java Best Practices for Efficient, Scalable, and Secure Code</h3>
-              <p class="muted">Udemy · UC-bd118b48-1dcb-4d70-8850-944a5ef2e5cd</p>
-            </article>
-          </div>
+          <ul class="cert-list">
+            <li class="cert reveal">
+              <span class="cert-idx mono">01</span>
+              <div class="cert-body">
+                <h3>Modern Advanced C++ Course</h3>
+                <p class="mono muted">Udemy · UC-439ae987-261e-45a3-bc13-7ad6f70a321c</p>
+              </div>
+              <span class="cert-arrow mono" aria-hidden="true">↗</span>
+            </li>
+            <li class="cert reveal">
+              <span class="cert-idx mono">02</span>
+              <div class="cert-body">
+                <h3>Mastering Data Structures &amp; Algorithms using C and C++</h3>
+                <p class="mono muted">Udemy · UC-ab722506-1517-4637-b5a2-bc858cd7170f</p>
+              </div>
+              <span class="cert-arrow mono" aria-hidden="true">↗</span>
+            </li>
+            <li class="cert reveal">
+              <span class="cert-idx mono">03</span>
+              <div class="cert-body">
+                <h3>TensorFlow: Machine Learning and Deep Learning with Python</h3>
+                <p class="mono muted">Udemy · UC-43ad56a5-618f-45cf-a688-e8d97d337399</p>
+              </div>
+              <span class="cert-arrow mono" aria-hidden="true">↗</span>
+            </li>
+            <li class="cert reveal">
+              <span class="cert-idx mono">04</span>
+              <div class="cert-body">
+                <h3>Java Best Practices for Efficient, Scalable, and Secure Code</h3>
+                <p class="mono muted">Udemy · UC-bd118b48-1dcb-4d70-8850-944a5ef2e5cd</p>
+              </div>
+              <span class="cert-arrow mono" aria-hidden="true">↗</span>
+            </li>
+          </ul>
         </div>
       </section>
 
       <section class="section subtle" id="events">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="ev.tag">// community</span>
-            <h2 data-i18n="ev.h">Events &amp; Competitions</h2>
-            <p data-i18n="ev.p">Community involvement and continuous learning.</p>
-          </div>
+          <header class="section-head reveal">
+            <span class="section-num mono">[06]</span>
+            <span class="section-tag mono" data-i18n="ev.tag">// community</span>
+            <h2 class="section-title"><span data-i18n="ev.h">Events &amp; Competitions</span></h2>
+            <p class="section-desc" data-i18n="ev.p">Community involvement and continuous learning.</p>
+          </header>
 
           <div class="grid-3">
             <article class="card reveal">
@@ -572,7 +607,6 @@
                 <li data-i18n="ev.c1.b3">Beecrowd practice and mentoring</li>
               </ul>
             </article>
-
             <article class="card reveal">
               <h3 data-i18n="ev.c2.h">Conferences</h3>
               <ul class="bullets">
@@ -581,7 +615,6 @@
                 <li data-i18n="ev.c2.b3">Porto Alegre Summit</li>
               </ul>
             </article>
-
             <article class="card reveal">
               <h3 data-i18n="ev.c3.h">Security &amp; Community</h3>
               <ul class="bullets">
@@ -594,50 +627,67 @@
         </div>
       </section>
 
-      <section class="section" id="contact">
+      <section class="section section--contact" id="contact">
         <div class="container">
-          <div class="section-head reveal">
-            <span class="section-tag" data-i18n="ct.tag">// contact</span>
-            <h2 data-i18n="ct.h">Let's build something</h2>
-            <p data-i18n="ct.p">
-              Open to senior backend roles, distributed systems challenges,
-              and AI engineering opportunities — remote or relocation.
+          <header class="section-head reveal">
+            <span class="section-num mono">[07]</span>
+            <span class="section-tag mono" data-i18n="ct.tag">// contact</span>
+            <h2 class="section-title section-title--big"><span data-i18n="ct.h">Let's build something</span></h2>
+            <p class="section-desc" data-i18n="ct.p">
+              Always happy to talk shop on backend engineering, distributed systems, and AI — drop me a line if you want to swap notes or trade ideas.
             </p>
-          </div>
+          </header>
 
-          <div class="contact-card card reveal">
-            <div class="contact-row">
-              <div class="contact-item">
-                <p class="meta-title" data-i18n="ct.e.t">Email</p>
-                <a class="meta-link" href="mailto:guiitaglietti@gmail.com">guiitaglietti@gmail.com</a>
-              </div>
-              <div class="contact-item">
-                <p class="meta-title" data-i18n="ct.l.t">LinkedIn</p>
-                <a class="meta-link" href="https://linkedin.com/in/guilherme-taglietti" target="_blank" rel="noopener noreferrer">linkedin.com/in/guilherme-taglietti</a>
-              </div>
-              <div class="contact-item">
-                <p class="meta-title" data-i18n="ct.g.t">GitHub</p>
-                <a class="meta-link" href="https://github.com/GuiTaglietti" target="_blank" rel="noopener noreferrer">github.com/GuiTaglietti</a>
-              </div>
-            </div>
+          <ul class="contact-list">
+            <li class="contact-item reveal">
+              <span class="ci-key mono" data-i18n="ct.e.t">Email</span>
+              <a class="ci-link mono" href="mailto:guiitaglietti@gmail.com">
+                <span>guiitaglietti@gmail.com</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="contact-item reveal">
+              <span class="ci-key mono" data-i18n="ct.l.t">LinkedIn</span>
+              <a class="ci-link mono" href="https://linkedin.com/in/guilherme-taglietti" target="_blank" rel="noopener noreferrer">
+                <span>linkedin.com/in/guilherme-taglietti</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="contact-item reveal">
+              <span class="ci-key mono" data-i18n="ct.g.t">GitHub</span>
+              <a class="ci-link mono" href="https://github.com/GuiTaglietti" target="_blank" rel="noopener noreferrer">
+                <span>github.com/GuiTaglietti</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          </ul>
 
-            <p class="muted small-note" data-i18n="ct.note">
-              Email is the fastest way to reach me. For code samples, check pinned repositories on GitHub.
-            </p>
-          </div>
+          <p class="muted small-note reveal" data-i18n="ct.note">
+            Email is the fastest way to reach me. For code samples, check pinned repositories on GitHub.
+          </p>
         </div>
       </section>
 
       <footer class="footer">
         <div class="container footer-inner">
-          <p>© <span id="year"></span> Guilherme Martinelli Taglietti</p>
-          <a href="#top" class="back-top" data-i18n="footer.top">Back to top ↑</a>
+          <div class="footer-meta mono">
+            <span>© <span id="year"></span> guilherme.taglietti</span>
+            <span class="footer-sep">·</span>
+            <span>built · html / css / js</span>
+            <span class="footer-sep">·</span>
+            <a href="#top" class="back-top" data-i18n="footer.top">back to top ↑</a>
+          </div>
+          <div class="footer-sig mono" aria-hidden="true">
+            <span class="sig-line"></span>
+            <span class="sig-text">end_of_file</span>
+            <span class="sig-line"></span>
+          </div>
         </div>
       </footer>
 
       <button class="fab-top" id="fabTop" type="button" aria-label="Back to top">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
-          <path d="M12 5l7 7M12 5L5 12M12 5v14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
     </main>

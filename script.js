@@ -1,8 +1,5 @@
-
-
 (() => {
   'use strict';
-
 
   const i18n = {
     en: {
@@ -14,7 +11,6 @@
       'nav.contact': 'Contact',
       'header.lang': 'EN',
 
-      'hero.status': 'Available for new opportunities',
       'hero.kicker': 'Senior Backend Software Engineer',
       'hero.title.l1': 'Building',
       'hero.title.l2': 'distributed systems',
@@ -23,7 +19,7 @@
       'hero.lead':
         'Senior Backend Software Engineer with 5+ years building scalable microservice architectures, AI-driven systems, and production-grade cloud platforms across Azure and AWS. Specialized in Python, asynchronous pipelines, LLM integrations, and high-performance computing.',
       'hero.m1.l': 'Location',
-      'hero.m1.v': 'Brazil — Remote / Relocation',
+      'hero.m1.v': 'Brazil — Remote',
       'hero.m2.l': 'Focus',
       'hero.m2.v': 'Backend · Distributed · AI · Cloud',
       'hero.m3.l': 'Stack',
@@ -49,7 +45,7 @@
         'Azure (CosmosDB, Service Bus, Container Apps) and AWS deployments, Ansible IaC, observability with OpenTelemetry, Graylog, and PostHog.',
 
       'edu.h': 'Education',
-      'edu.pill': 'BSc · GPA 9.3',
+      'edu.pill': "Bachelor's degree",
       'edu.sub': "Bachelor's in Computer Science — Universidade de Passo Fundo (UPF) · 2022–2025",
       'edu.b1':
         'Strong foundation in algorithms, data structures, operating systems, networks, databases, software engineering, and distributed systems.',
@@ -162,13 +158,13 @@
       'ct.tag': '// contact',
       'ct.h': "Let's build something",
       'ct.p':
-        'Open to senior backend roles, distributed systems challenges, and AI engineering opportunities — remote or relocation.',
+        'Always happy to talk shop on backend engineering, distributed systems, and AI — drop me a line if you want to swap notes or trade ideas.',
       'ct.e.t': 'Email',
       'ct.l.t': 'LinkedIn',
       'ct.g.t': 'GitHub',
       'ct.note': 'Email is the fastest way to reach me. For code samples, check pinned repositories on GitHub.',
 
-      'footer.top': 'Back to top ↑',
+      'footer.top': 'back to top ↑',
     },
 
     pt: {
@@ -180,7 +176,6 @@
       'nav.contact': 'Contato',
       'header.lang': 'PT',
 
-      'hero.status': 'Disponível para novas oportunidades',
       'hero.kicker': 'Engenheiro de Software Sênior — Backend',
       'hero.title.l1': 'Construindo',
       'hero.title.l2': 'sistemas distribuídos',
@@ -189,7 +184,7 @@
       'hero.lead':
         'Engenheiro de Software Sênior com mais de 5 anos construindo arquiteturas de microsserviços escaláveis, sistemas orientados por IA e plataformas cloud em produção (Azure e AWS). Especializado em Python, pipelines assíncronos, integrações com LLMs e computação de alto desempenho.',
       'hero.m1.l': 'Localização',
-      'hero.m1.v': 'Brasil — Remoto / Relocação',
+      'hero.m1.v': 'Brasil — Remoto',
       'hero.m2.l': 'Foco',
       'hero.m2.v': 'Backend · Distribuído · IA · Cloud',
       'hero.m3.l': 'Stack',
@@ -215,7 +210,7 @@
         'Deployments em Azure (CosmosDB, Service Bus, Container Apps) e AWS, Ansible IaC, observabilidade com OpenTelemetry, Graylog e PostHog.',
 
       'edu.h': 'Formação',
-      'edu.pill': 'Bacharelado · GPA 9.3',
+      'edu.pill': 'Bacharelado',
       'edu.sub': 'Bacharelado em Ciência da Computação — Universidade de Passo Fundo (UPF) · 2022–2025',
       'edu.b1':
         'Sólida formação em algoritmos, estruturas de dados, sistemas operacionais, redes, bancos de dados, engenharia de software e sistemas distribuídos.',
@@ -328,21 +323,22 @@
       'ct.tag': '// contato',
       'ct.h': 'Vamos construir algo',
       'ct.p':
-        'Aberto a vagas sêniores de backend, desafios de sistemas distribuídos e oportunidades em engenharia de IA — remoto ou relocação.',
+        'Sempre feliz em trocar ideias sobre engenharia backend, sistemas distribuídos e IA — me chama se quiser bater um papo ou discutir tecnologia.',
       'ct.e.t': 'Email',
       'ct.l.t': 'LinkedIn',
       'ct.g.t': 'GitHub',
       'ct.note': 'Email é o canal mais rápido. Para amostras de código, veja os repositórios fixados no GitHub.',
 
-      'footer.top': 'Voltar ao topo ↑',
+      'footer.top': 'voltar ao topo ↑',
     },
   };
 
   const flags = { en: '🇺🇸', pt: '🇧🇷' };
 
-
   const STORAGE_LANG = 'gt-lang';
   const STORAGE_THEME = 'gt-theme';
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const getLang = () => {
     const saved = localStorage.getItem(STORAGE_LANG);
@@ -360,7 +356,6 @@
   let currentLang = getLang();
   let currentTheme = getTheme();
 
-
   function applyLang(lang) {
     currentLang = lang;
     localStorage.setItem(STORAGE_LANG, lang);
@@ -376,24 +371,214 @@
     if (flag) flag.textContent = flags[lang];
   }
 
-
   function applyTheme(theme) {
     currentTheme = theme;
     localStorage.setItem(STORAGE_THEME, theme);
     document.documentElement.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'light' ? '#fafbfc' : '#06070a');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#f5f4ee' : '#0a0a0c');
   }
 
+  function startUtcClock() {
+    const el = document.getElementById('utcClock');
+    if (!el) return;
+    const tick = () => {
+      const d = new Date();
+      const hh = String(d.getUTCHours()).padStart(2, '0');
+      const mm = String(d.getUTCMinutes()).padStart(2, '0');
+      const ss = String(d.getUTCSeconds()).padStart(2, '0');
+      el.textContent = `${hh}:${mm}:${ss}`;
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  function setupReveals() {
+    const reveals = document.querySelectorAll('.reveal');
+
+    reveals.forEach((el) => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      const siblings = Array.from(parent.children).filter((c) => c.classList.contains('reveal'));
+      const idx = siblings.indexOf(el);
+      const delay = Math.min(idx, 8) * 70;
+      el.style.setProperty('--reveal-delay', `${delay}ms`);
+    });
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      reveals.forEach((el) => el.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+  }
+
+  function setupTerminal() {
+    const out = document.getElementById('terminalOutput');
+    if (!out) return;
+
+    const segments = [
+      { t: '$ ', c: 'tp', s: 18 },
+      { t: 'whoami\n', c: 'tc', s: 28 },
+      { t: 'guilherme.taglietti\n\n', c: 'to', s: 12 },
+
+      { t: '$ ', c: 'tp', s: 18 },
+      { t: 'cat role.json\n', c: 'tc', s: 28 },
+      { t: '{\n', c: 'to', s: 8 },
+      { t: '  "title"', c: 'tk', s: 8 },
+      { t: ': ', c: 'to', s: 8 },
+      { t: '"Senior Backend Software Engineer"', c: 'ts', s: 6 },
+      { t: ',\n', c: 'to', s: 8 },
+      { t: '  "experience"', c: 'tk', s: 8 },
+      { t: ': ', c: 'to', s: 8 },
+      { t: '"5+ years"', c: 'ts', s: 8 },
+      { t: ',\n', c: 'to', s: 8 },
+      { t: '  "focus"', c: 'tk', s: 8 },
+      { t: ': [', c: 'to', s: 8 },
+      { t: '"distributed_systems"', c: 'ts', s: 6 },
+      { t: ', ', c: 'to', s: 8 },
+      { t: '"ai"', c: 'ts', s: 8 },
+      { t: ', ', c: 'to', s: 8 },
+      { t: '"cloud"', c: 'ts', s: 8 },
+      { t: '],\n', c: 'to', s: 8 },
+      { t: '  "cloud"', c: 'tk', s: 8 },
+      { t: ': [', c: 'to', s: 8 },
+      { t: '"azure"', c: 'ts', s: 8 },
+      { t: ', ', c: 'to', s: 8 },
+      { t: '"aws"', c: 'ts', s: 8 },
+      { t: ']\n', c: 'to', s: 8 },
+      { t: '}\n\n', c: 'to', s: 8 },
+
+      { t: '$ ', c: 'tp', s: 18 },
+      { t: 'echo $STATUS\n', c: 'tc', s: 28 },
+      { t: 'shipping production systems', c: 'to', s: 16 },
+    ];
+
+    if (reducedMotion) {
+      const frag = document.createDocumentFragment();
+      segments.forEach((seg) => {
+        const span = document.createElement('span');
+        span.className = seg.c;
+        span.textContent = seg.t;
+        frag.appendChild(span);
+      });
+      out.appendChild(frag);
+      return;
+    }
+
+    let segIdx = 0;
+    let charIdx = 0;
+    let span = null;
+
+    const step = () => {
+      if (segIdx >= segments.length) return;
+      const seg = segments[segIdx];
+      if (charIdx === 0) {
+        span = document.createElement('span');
+        span.className = seg.c;
+        out.appendChild(span);
+      }
+      if (charIdx < seg.t.length) {
+        span.textContent += seg.t[charIdx];
+        charIdx++;
+        const jitter = seg.s + Math.random() * 18;
+        setTimeout(step, jitter);
+      } else {
+        segIdx++;
+        charIdx = 0;
+        const pause = seg.t.endsWith('\n') ? 30 : 12;
+        setTimeout(step, pause);
+      }
+    };
+
+    setTimeout(step, 700);
+  }
+
+  function setupNav() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    if (!navToggle || !navMenu) return;
+
+    navToggle.addEventListener('click', () => {
+      const open = navMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function setupCvDropdown() {
+    const cvDropdown = document.getElementById('cvDropdown');
+    const cvTrigger = document.getElementById('cvTrigger');
+    if (!cvDropdown || !cvTrigger) return;
+
+    cvTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = cvDropdown.classList.toggle('open');
+      cvTrigger.setAttribute('aria-expanded', String(open));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!cvDropdown.contains(e.target)) {
+        cvDropdown.classList.remove('open');
+        cvTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        cvDropdown.classList.remove('open');
+        cvTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function setupFab() {
+    const fab = document.getElementById('fabTop');
+    if (!fab) return;
+
+    const onScroll = () => {
+      if (window.scrollY > 600) fab.classList.add('show');
+      else fab.classList.remove('show');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    fab.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    });
+  }
 
   function init() {
     applyLang(currentLang);
     applyTheme(currentTheme);
 
-
     const year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
-
 
     const langBtn = document.getElementById('langToggle');
     if (langBtn) {
@@ -402,7 +587,6 @@
       });
     }
 
-
     const themeBtn = document.getElementById('themeToggle');
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
@@ -410,81 +594,12 @@
       });
     }
 
-
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    if (navToggle && navMenu) {
-      navToggle.addEventListener('click', () => {
-        const open = navMenu.classList.toggle('open');
-        navToggle.setAttribute('aria-expanded', String(open));
-      });
-
-      navMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('open');
-          navToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-
-    const cvDropdown = document.getElementById('cvDropdown');
-    const cvTrigger = document.getElementById('cvTrigger');
-    if (cvDropdown && cvTrigger) {
-      cvTrigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = cvDropdown.classList.toggle('open');
-        cvTrigger.setAttribute('aria-expanded', String(open));
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!cvDropdown.contains(e.target)) {
-          cvDropdown.classList.remove('open');
-          cvTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          cvDropdown.classList.remove('open');
-          cvTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-
-
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window && reveals.length) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12, rootMargin: '0px 0px -50px 0px' }
-      );
-      reveals.forEach((el) => observer.observe(el));
-    } else {
-      reveals.forEach((el) => el.classList.add('visible'));
-    }
-
-
-    const fab = document.getElementById('fabTop');
-    if (fab) {
-      const onScroll = () => {
-        if (window.scrollY > 600) fab.classList.add('show');
-        else fab.classList.remove('show');
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-
-      fab.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
+    setupNav();
+    setupCvDropdown();
+    setupReveals();
+    setupFab();
+    startUtcClock();
+    setupTerminal();
   }
 
   if (document.readyState === 'loading') {
